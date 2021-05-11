@@ -1,15 +1,61 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Vue from "vue";
+import Router from "vue-router";
+import Login from "@/components/pages/Login";
+import Dashboard from "@/components/Dashboard";
+import Products from "@/components/pages/Products";
+import OrderList from "@/components/pages/OrderList";
+import Coupon from "@/components/pages/Coupon";
+import SimOrder from "@/components/pages/SimOrder";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
+  linkActiveClass:'active',
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path:"*",
+      redirect:'Login',
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: "/admin",
+      name: "Dashboard",
+      component: Dashboard,
+      children: [
+        {
+          path: "products",
+          name: "Products",
+          component: Products,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: "orderlist",
+          name: "OrderList",
+          component: OrderList,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: "coupon",
+          name: "Coupon",
+          component: Coupon,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: "simorder",
+          name: "SimOrder",
+          component: SimOrder,
+        }
+      ]
     }
   ]
-})
+});
