@@ -12,12 +12,14 @@ import bootstrap from "bootstrap";
 import App from "./App";
 import "./bus";
 import Currency from "./filters/Currency";
+import TimeChange from "./filters/TimeChange";
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
 
 Vue.component("Loading", Loading);
 Vue.filter("Currency", Currency);
+Vue.filter("TimeChange", TimeChange);
 
 Vue.config.productionTip = false;
 
