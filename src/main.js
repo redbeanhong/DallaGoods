@@ -6,7 +6,6 @@ import VueAxios from "vue-axios";
 import router from "./router";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-
 import bootstrap from "bootstrap";
 
 import App from "./App";
@@ -22,6 +21,36 @@ Vue.filter("Currency", Currency);
 Vue.filter("TimeChange", TimeChange);
 
 Vue.config.productionTip = false;
+
+// ----------------------------------------------------
+import {
+  ValidationObserver,
+  ValidationProvider,
+  extend,
+  configure
+} from "vee-validate";
+import * as rules from "vee-validate/dist/rules";
+import { messages } from "vee-validate/dist/locale/zh_TW.json";
+
+Object.keys(rules).forEach(rule => {
+  extend(rule, {
+    ...rules[rule], // copies rule configuration
+    message: messages[rule] // assign message
+  });
+});
+
+// localize('zh_TW', TW);
+
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+
+configure({
+  classes: {
+    valid: "is-valid",
+    invalid: "is-invalid"
+  }
+});
+// ----------------------------------------------------
 
 /* eslint-disable no-new */
 new Vue({

@@ -46,7 +46,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/simorder"><i class="fas fa-shopping-cart mr-1"></i>模擬訂單</router-link>
+            <router-link class="nav-link" to="/customer_orders"><i class="fas fa-shopping-cart mr-1"></i>模擬訂單</router-link>
           </li>
         </ul>
         <!-- END OF 模擬功能 -->

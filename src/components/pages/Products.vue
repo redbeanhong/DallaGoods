@@ -372,6 +372,7 @@ export default {
         if (res.data.success) {
           vm.closeModal("productModal");
           vm.getProducts();
+          this.tempProduct = {};
         } else {
           console.log("上傳失敗");
           console.log(res);

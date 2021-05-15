@@ -5,7 +5,7 @@ import Dashboard from "@/components/Dashboard";
 import Products from "@/components/pages/Products";
 import OrderList from "@/components/pages/OrderList";
 import Coupon from "@/components/pages/Coupon";
-import SimOrder from "@/components/pages/SimOrder";
+import CustomerOrders from "@/components/pages/CustomerOrders";
 
 Vue.use(Router);
 
@@ -50,11 +50,17 @@ export default new Router({
             requiresAuth: true
           }
         },
+      ]
+    },{
+      path: "/",
+      name: "index",
+      component: Dashboard,
+      children: [
         {
-          path: "simorder",
-          name: "SimOrder",
-          component: SimOrder,
-        }
+          path: "customer_orders",
+          name: "CustomerOrders",
+          component: CustomerOrders,
+        },
       ]
     }
   ]

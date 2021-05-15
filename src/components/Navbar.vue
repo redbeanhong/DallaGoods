@@ -40,7 +40,6 @@ export default {
       const vm = this;
       this.$http.post(api).then(res => {
         vm.$router.push("/login");
-        console.log('signout');
       });
     }
   },
