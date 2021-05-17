@@ -368,7 +368,7 @@ export default {
         code: vm.coupon_code
       };
       this.$http.post(api, { data: coupon }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.getCart();
       });
     },
@@ -376,8 +376,10 @@ export default {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
       this.$http.post(api, { data: this.form }).then(res => {
-        console.log(res);
-        this.getCart();
+        // console.log(res);
+        if (res.data.success) {
+          vm.$router.push({ path: `customer_checkout/${res.data.orderId}`})
+        }
       });
     }
   },

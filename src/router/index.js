@@ -6,15 +6,16 @@ import Products from "@/components/pages/Products";
 import OrderList from "@/components/pages/OrderList";
 import Coupon from "@/components/pages/Coupon";
 import CustomerOrders from "@/components/pages/CustomerOrders";
+import CustomerCheckout from "@/components/pages/CustomerCheckout";
 
 Vue.use(Router);
 
 export default new Router({
-  linkActiveClass:'active',
+  linkActiveClass: "active",
   routes: [
     {
-      path:"*",
-      redirect:'Login',
+      path: "*",
+      redirect: "Login"
     },
     {
       path: "/login",
@@ -49,9 +50,10 @@ export default new Router({
           meta: {
             requiresAuth: true
           }
-        },
+        }
       ]
-    },{
+    },
+    {
       path: "/",
       name: "index",
       component: Dashboard,
@@ -59,9 +61,14 @@ export default new Router({
         {
           path: "customer_orders",
           name: "CustomerOrders",
-          component: CustomerOrders,
+          component: CustomerOrders
         },
+        {
+          path: "customer_checkout/:orderId",
+          name: "CustomerCheckout",
+          component: CustomerCheckout,
+        }
       ]
-    }
+    },
   ]
 });
