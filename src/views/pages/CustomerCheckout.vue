@@ -74,7 +74,7 @@ export default {
       this.$http.get(api).then(res => {
         console.log(res);
         if (res.data.order) {
-          vm.order=res.data.order
+          vm.order=res.datga.order
         }else{
           vm.$router.push({ path: "/" });
         }

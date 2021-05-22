@@ -12,7 +12,4 @@ export default {
 
 <style lang="scss">
 @import "./assets/all";
-// #app{
-//   width: 100%;
-// }
 </style>

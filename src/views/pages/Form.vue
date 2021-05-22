@@ -268,8 +268,8 @@
 
 <script>
 import $ from "jquery";
-import Cart from "./Cart.vue";
-import Pagination from "./Pagination.vue";
+import Cart from "../../components/Cart.vue";
+import Pagination from "../../components/Pagination.vue";
 
 export default {
   data() {

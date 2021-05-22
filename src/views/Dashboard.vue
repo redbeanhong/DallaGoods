@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import Navbar from "./Navbar.vue";
-import Sidebar from "./Sidebar.vue";
-import Alert from "./AlertMessage.vue";
+import Navbar from "../components/Navbar.vue";
+import Sidebar from "../components/Sidebar.vue";
+import Alert from "../components/AlertMessage.vue";
 
 export default {
   created() {
@@ -33,3 +33,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/helpers/dashboard";
+</style>
