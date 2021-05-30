@@ -35,5 +35,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/helpers/dashboard";
+/*
+ * Content
+ */
+
+[role="main"] {
+  padding-top: 48px; /* Space for fixed navbar */
+}
 </style>

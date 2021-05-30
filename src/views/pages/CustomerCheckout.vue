@@ -1,5 +1,6 @@
 <template>
   <div class="my-5 row justify-content-center">
+    <shoppingStep class="col-10 mb-4"></shoppingStep>
     <form class="col-md-6" @submit.prevent="payOrder">
       <table class="table">
         <thead>
@@ -57,11 +58,12 @@
 </template>
 
 <script>
+import ShoppingStep from "../../components/ShoppingStep.vue";
 export default {
   data() {
     return {
       order: {
-        user:{}
+        user: {}
       }
     };
   },
@@ -74,26 +76,29 @@ export default {
       this.$http.get(api).then(res => {
         console.log(res);
         if (res.data.order) {
-          vm.order=res.datga.order
-        }else{
+          vm.order = res.data.order;
+        } else {
           vm.$router.push({ path: "/" });
         }
       });
     },
-    payOrder(){
+    payOrder() {
       const vm = this;
       let orderId = vm.$route.params.orderId;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${orderId}`;
       this.$http.post(api).then(res => {
         // console.log(res);
         if (res.data.success) {
-          vm.getOrder()
+          vm.getOrder();
         }
       });
     }
   },
+  components: {
+    ShoppingStep
+  },
   created() {
     this.getOrder();
-  },
+  }
 };
 </script>

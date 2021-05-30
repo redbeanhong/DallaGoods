@@ -6,7 +6,7 @@
           ><img src="../../assets/DM1.jpg" class="w-100 mb-4" alt="DM"
         /></a>
         <a href="">
-          <img src="../../assets/DM2.jpg" class="w-100" alt="DM" />
+          <img src="../../assets/DM2.jpg" class="w-100 mb-4 mb-md-0" alt="DM" />
         </a>
       </div>
       <div class="col-md-6">
@@ -14,7 +14,7 @@
           ><img src="../../assets/DM4.jpg" class="w-100 mb-4" alt="DM"
         /></a>
         <a href="">
-          <img src="../../assets/DM3.jpg" class="w-100" alt="DM" />
+          <img src="../../assets/DM3.jpg" class="w-100 mb-4 mb-md-0" alt="DM" />
         </a>
       </div>
     </div>

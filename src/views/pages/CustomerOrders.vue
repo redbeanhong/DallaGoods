@@ -17,9 +17,20 @@
         <div class="card border-0 shadow-sm">
           <a href="#" @click.prevent="getProduct(item.id)">
             <div
+              class="mask-toggle"
               style="height: 250px; background-size: cover; background-position: center"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
-            ></div>
+            >
+              <div class="mask h-100"></div>
+              <a class="heart heart-regular h3" @click.prevent="changeStared($event, item.id)" v-if="!stared.includes(item.id)"
+                ><i class="far fa-heart"></i
+              ></a>
+              <a class="heart h3" 
+              :class="{'active':stared.includes(item.id)}"
+              @click.prevent="changeStared($event, item.id)"
+                ><i class="fas fa-heart"></i
+              ></a>
+            </div>
           </a>
 
           <div class="card-body">
@@ -42,76 +53,6 @@
       </div>
     </div>
     <!-- END OF CARD -->
-
-    <!-- MODEL PRODUCT INFO -->
-    <div
-      class="modal fade"
-      id="productModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              {{ product.title }}
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img :src="product.imageUrl" class="img-fluid" alt="" />
-            <blockquote class="blockquote mt-3">
-              <p class="mb-0">{{ product.content }}</p>
-              <footer class="blockquote-footer text-right">
-                {{ product.description }}
-              </footer>
-            </blockquote>
-            <div class="d-flex justify-content-between align-items-baseline">
-              <div class="h4" v-if="!product.price">
-                {{ product.origin_price }} 元
-              </div>
-              <del class="h6" v-if="product.price"
-                >原價 {{ product.origin_price }} 元</del
-              >
-              <div class="h4" v-if="product.price">
-                現在只要 {{ product.price }} 元
-              </div>
-            </div>
-            <select name="" class="form-control mt-3" v-model="product.num">
-              <option :value="num" v-for="num in 10" :key="num">
-                選購 {{ num }} {{ product.unit }}
-              </option>
-            </select>
-          </div>
-          <div class="modal-footer">
-            <div class="text-muted text-nowrap mr-3">
-              小計 <strong>{{ product.num * product.price }}</strong> 元
-            </div>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="addToCart(product.id, product.num)"
-            >
-              <i
-                class="fas fa-spinner fa-spin"
-                v-if="product.id === status.loadingItem"
-              ></i>
-              加到購物車
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- END OF MODEL PRODUCT INFO -->
   </div>
 </template>
 
@@ -125,27 +66,23 @@ export default {
     return {
       allProducts: [],
       products: [], //呈現在頁面的所有商品清單
-      product: {}, //單一商品細節暫存
-      carts: {}, //購物車內容
       isLoading: false, //讀取中的效果控制
-      fullPage: true,
+      fullPage: true, //讀取中的效果全畫面
       status: {
+        //讀取中的物件
         loadingItem: "",
         fileUploading: ""
       },
-      coupon_code: "",
-      form: {
-        user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: ""
-        },
-        message: ""
-      },
-      pagination: {},
-      value: "",
-      productType: ""
+      pagination: {}, //分頁控制
+      stared: JSON.parse(localStorage.getItem("personalProduct")) || [],
+      productType: "", //頁面商品種類
+      productList: {
+        //所有商品種類
+        key_ring: "包與鑰的事",
+        earring: "耳朵上的事",
+        tray: "桌上的好事",
+        technology: "掌心的小事"
+      }
     };
   },
   components: {
@@ -164,93 +101,24 @@ export default {
           return e.is_enabled === 1;
         });
 
-        switch (vm.productType) {
-          case "all":
-            vm.products = vm.allProducts;
-            break;
-
-          case "key_ring":
-            console.log("鑰匙圈");
-            vm.products = vm.allProducts.filter(e => {
-              return e.category === "包與鑰的事";
-            });
-            break;
-
-          case "earring":
-            console.log("耳環");
-            vm.products = vm.allProducts.filter(e => {
-              return e.category === "耳朵上的事";
-            });
-            break;
-
-          case "tray":
-            console.log("盤子");
-            vm.products = vm.allProducts.filter(e => {
-              return e.category === "桌上的好事";
-            });
-            break;
-
-          case "technology":
-            console.log("手機架");
-            vm.products = vm.allProducts.filter(e => {
-              return e.category === "掌心的小事";
-            });
-            break;
-
-          default:
-            vm.products = vm.allProducts;
-            break;
+        if (vm.productList[vm.productType]) {
+          vm.products = vm.allProducts.filter(e => {
+            return e.category === vm.productList[vm.productType];
+          });
+        } else if (vm.productType === "stared") {
+          vm.products = vm.allProducts.filter(e => {
+            return vm.stared.includes(e.id);
+          });
+        } else {
+          vm.products = vm.allProducts;
         }
+
         vm.pagination = res.data.pagination;
         vm.isLoading = false;
       });
     },
-    // 取得單一商品細節
-    getProduct(itemId) {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${itemId}`;
-      vm.status.loadingItem = itemId;
-      this.$http.get(api).then(res => {
-        // console.log(res);
-        vm.product = res.data.product;
-        $("#productModal").modal("show");
-        vm.status.loadingItem = "";
-      });
-    },
-    addToCart(id, qty = 1) {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      let cart = {
-        product_id: id,
-        qty
-      };
-      vm.status.fileUploading = id;
-      this.$http.post(api, { data: cart }).then(res => {
-        // console.log(res);
-        this.getCart();
-        $("#productModal").modal("hide");
-        vm.status.fileUploading = "";
-      });
-    },
-    getCart() {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      this.$http.get(api).then(res => {
-        // console.log(res);
-        vm.carts = res.data.data;
-      });
-    },
-    removeCartItem(itemId) {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${itemId}`;
-      this.status.loadingItem = itemId;
-      this.$http.delete(api).then(res => {
-        // console.log(res);
-        this.getCart();
-        setTimeout(() => {
-          vm.status.loadingItem = "";
-        }, 300);
-      });
+    getProduct(id) {
+      this.$router.push({ path: `/product_detail/${id}` });
     },
     addCouponCode() {
       const vm = this;
@@ -263,29 +131,70 @@ export default {
         this.getCart();
       });
     },
-    submitForm() {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
-      this.$http.post(api, { data: this.form }).then(res => {
-        // console.log(res);
-        if (res.data.success) {
-          vm.$router.push({ path: `customer_checkout/${res.data.orderId}` });
-        }
-      });
+    changeStared(e, id) {
+      e.stopPropagation();
+      let vm = this;
+      if (!vm.stared.includes(id)) {
+        // 如果此商品尚未在關注清單，就push商品名稱進入清單
+        vm.stared.push(id);
+      } else {
+        // 如果此商品已經在關注清單，就將他從清單移除
+        vm.stared.splice(
+          vm.stared.findIndex(e => e === id),
+          1
+        );
+      }
+
+      // 將關注資料存到localStorage
+      localStorage.setItem("personalProduct", JSON.stringify(vm.stared));
+      vm.getProducts();
     }
   },
   created() {
     this.productType = this.$route.params.productType;
-    console.log(this.productType);
     this.getProducts();
-    this.getCart();
   },
   watch: {
     $route() {
       this.productType = this.$route.params.productType;
-      console.log(this.productType);
       this.getProducts();
     }
   }
 };
 </script>
+
+<style lang="scss">
+.mask-toggle {
+  position: relative;
+  &:hover {
+    .mask {
+      display: flex;
+    }
+
+    .heart-regular{
+      display: block;
+    }
+  }
+  .mask {
+    background-color: rgba(233, 233, 233, 0.2);
+    display: none;
+  }
+  .heart {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    padding: 0;
+    margin: 0;
+    display: none;
+  }
+
+  .heart.active {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    padding: 0;
+    margin: 0;
+    display: block;
+  }
+}
+</style>

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Navbar from "../components/NavbarCustomer";
+import Navbar from "../components/CustomerNavbar";
 import Infobar from "../components/Infobar";
 import Banner from "../components/Banner";
 import Alert from "../components/AlertMessage";

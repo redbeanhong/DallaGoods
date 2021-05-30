@@ -6,12 +6,14 @@
 
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-10">
+        <div class="col-md-10 col-12">
+          <shoppingStep class="mb-4"></shoppingStep>
+          
           <section class="row mb-4" v-for="item in carts.carts" :key="item.id">
             <div class="col-md-4">
               <div
                 class="h-100"
-                style="background-size: cover; background-position: center"
+                style="background-size: cover; background-position: center;"
                 :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
               ></div>
             </div>
@@ -100,11 +102,11 @@
           </section>
           <section class="row">
             <div class="col-md-3">
-              <p
-                class="text-success"
-                v-if="carts.final_total !== carts.total"
-              >
-                已折扣: <span>NT{{ carts.final_total-carts.total | Currency }}</span>
+              <p class="text-success" v-if="carts.final_total !== carts.total">
+                已折扣:
+                <span
+                  >NT{{ (carts.final_total - carts.total) | Currency }}</span
+                >
               </p>
             </div>
             <div class="col-md-9 d-flex justify-content-end">
@@ -118,9 +120,11 @@
                 >
                   折扣價: <span>NT{{ carts.final_total | Currency }}</span>
                 </p>
-                <button type="button" class="btn btn-primary btn-lg">
-                  結帳去
-                </button>
+                <router-link class="nav-link" to="/customer_form"
+                  ><button type="button" class="btn btn-primary btn-lg">
+                    結帳去
+                  </button>
+                </router-link>
               </div>
             </div>
           </section>
@@ -132,6 +136,7 @@
 
 <script>
 // import $ from "jquery";
+import ShoppingStep from "../../components/ShoppingStep.vue";
 
 export default {
   data() {
@@ -202,6 +207,8 @@ export default {
         this.getCart();
       });
     }
+  },components:{
+    ShoppingStep,
   },
   created() {
     this.getCart();

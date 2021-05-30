@@ -1,0 +1,111 @@
+<template>
+  <div>
+    <!-- LOADING -->
+    <loading :active.sync="isLoading"></loading>
+    <!-- END OF LOADING -->
+    <div class="container">
+      <div class="row mb-5 border-bottom border-primary p-3" v-for="item in comments" :key="item.creatAt">
+        <div class="col-md-2">
+          <div class="m-auto w-50" style="height: 100px; background-size: cover; background-position: center;" :class="item.photoUrl"></div>
+          <p class="text-primary text-center">{{item.name}}</p>
+        </div>
+        <div class="col-md-6">
+          {{item.content}}
+        </div>
+        <div class="col-md-2">
+          <div class="heart-group text-center text-md-left">
+            <i class="fas fa-heart text-danger mr-1" v-for="num in item.score" :key="num"></i>
+          </div>
+        </div>
+        <div class="col-md-2 text-right">
+          <div class="mb-2" style="height: 150px; background-size: cover; background-position: center;" :class="item.imageUrl"></div>
+          {{item.creatAt}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      comments:[
+        {name:'大黃貓',
+        photoUrl:'imagePhoto1',
+        imageUrl:'imageProduct1',
+        creatAt:'2021-05-02',
+        content:'包裝細心，品質良好！朕的項圈也是在這裡客製的，朕甚為心喜。',
+        score:5,
+        },
+        {name:'蓬蓬狗',
+        photoUrl:'imagePhoto2',
+        imageUrl:'imageProduct2',
+        creatAt:'2021-05-09',
+        content:'第一次購買Dalla Goods的商品，非常喜歡呢～汪～！',
+        score:4,
+        },
+        {name:'太陽犬',
+        photoUrl:'imagePhoto3',
+        imageUrl:'imageProduct3',
+        creatAt:'2021-04-09',
+        content:'汪汪！！Dalla Goods的商品讚讚讚！！媽咪也讚不絕口哦！！',
+        score:5,
+        },
+        {name:'看啥喵',
+        photoUrl:'imagePhoto4',
+        imageUrl:'imageProduct4',
+        creatAt:'2021-05-20',
+        content:'聽說全手工製作很用心，朕買來看看，覺得不錯，來人啊！賞罐罐。',
+        score:5,
+        },
+        {name:'車底貓',
+        photoUrl:'imagePhoto5',
+        imageUrl:'imageProduct5',
+        creatAt:'2021-05-10',
+        content:'作品質量很好，朕喜歡。',
+        score:5,
+        },
+      ],
+      isLoading: false, //讀取中的效果控制
+      fullPage: true,
+      ddd:'',
+    };
+  },
+};
+</script>
+
+<style lang="css">
+  .imagePhoto1{
+     background-image: url("../../assets/photo1.jpg");
+  }
+  .imagePhoto2{
+     background-image: url("../../assets/photo2.jpg");
+  }
+  .imagePhoto3{
+     background-image: url("../../assets/photo3.jpg");
+  }
+  .imagePhoto4{
+     background-image: url("../../assets/photo4.jpg");
+  }
+  .imagePhoto5{
+     background-image: url("../../assets/photo5.jpg");
+  }
+
+  .imageProduct1{
+     background-image: url("../../assets/product1.png");
+  }
+  .imageProduct2{
+     background-image: url("../../assets/product2.png");
+  }
+  .imageProduct3{
+     background-image: url("../../assets/product3.png");
+  }
+  .imageProduct4{
+     background-image: url("../../assets/product4.png");
+  }
+  .imageProduct5{
+     background-image: url("../../assets/product5.png");
+  }
+</style>

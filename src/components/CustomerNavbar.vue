@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="#">
-        <img src="../assets/logo.jpg" width="50" height="50" alt="LOGO" />
-      </a>
+    <nav class="navbar navbar-expand-lg navbar-primary">
+      <router-link class="navbar-brand" to="/"
+        ><img src="../assets/logo.jpg" width="50" height="50" alt="LOGO"
+      /></router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,10 +17,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active border-right">
-            <router-link class="nav-link" to="/">首頁</router-link>
-          </li>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav-pills">
           <li class="nav-item border-right">
             <router-link class="nav-link" to="/customer_orders/all"
               >全部商品</router-link
@@ -50,14 +47,17 @@
 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-heart"></i></a>
+            <router-link class="nav-link nav-link-icon" to="/customer_orders/stared"
+              ><i class="fas fa-heart"></i
+            ></router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+            <a class="nav-link nav-link-icon" href="#"><i class="fas fa-bell"></i></a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="cart"
-              ><i class="fas fa-shopping-cart"></i></router-link>
+            <router-link class="nav-link nav-link-icon" to="/customer_cart"
+              ><i class="fas fa-shopping-cart"></i
+            ></router-link>
           </li>
         </ul>
       </div>
@@ -78,3 +78,4 @@ export default {
   }
 };
 </script>
+
