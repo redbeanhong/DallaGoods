@@ -4,30 +4,26 @@
     <loading :active.sync="isLoading"></loading>
     <!-- END OF LOADING -->
 
-    <!-- PAGINATION -->
-    <pagination
-      :pagination="pagination"
-      v-on:getpagination="getProducts"
-    ></pagination>
-    <!-- END OF PAGINATION -->
-
     <!-- CARD -->
     <div class="row mt-4">
       <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
         <div class="card border-0 shadow-sm">
           <a href="#" @click.prevent="getProduct(item.id)">
             <div
-              class="mask-toggle"
-              style="height: 250px; background-size: cover; background-position: center"
+              class="mask-toggle img img-mid"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
             >
               <div class="mask h-100"></div>
-              <a class="heart heart-regular h3" @click.prevent="changeStared($event, item.id)" v-if="!stared.includes(item.id)"
+              <a
+                class="heart heart-regular h3 text-danger"
+                @click.prevent="changeStared($event, item.id, item.title)"
+                v-if="!stared.includes(item.id)"
                 ><i class="far fa-heart"></i
               ></a>
-              <a class="heart h3" 
-              :class="{'active':stared.includes(item.id)}"
-              @click.prevent="changeStared($event, item.id)"
+              <a
+                class="heart h3 text-danger"
+                :class="{ active: stared.includes(item.id) }"
+                @click.prevent="changeStared($event, item.id)"
                 ><i class="fas fa-heart"></i
               ></a>
             </div>
@@ -53,6 +49,13 @@
       </div>
     </div>
     <!-- END OF CARD -->
+
+    <!-- PAGINATION -->
+    <pagination
+      :pagination="pagination"
+      v-on:getpagination="getProducts"
+    ></pagination>
+    <!-- END OF PAGINATION -->
   </div>
 </template>
 
@@ -78,6 +81,7 @@ export default {
       productType: "", //頁面商品種類
       productList: {
         //所有商品種類
+        all: "all",
         key_ring: "包與鑰的事",
         earring: "耳朵上的事",
         tray: "桌上的好事",
@@ -86,14 +90,19 @@ export default {
     };
   },
   components: {
-    Pagination,
-    Cart
+    Pagination
   },
   methods: {
     // 取得所有商品，並加入到頁面的商品清單
     getProducts(page = 1) {
       const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
+
+      if (vm.productType === "all") {
+        api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
+        console.log('all');
+      }
+
       vm.isLoading = true;
       this.$http.get(api).then(res => {
         // console.log(res);
@@ -101,42 +110,43 @@ export default {
           return e.is_enabled === 1;
         });
 
-        if (vm.productList[vm.productType]) {
+        if (vm.productType === "all") {
+          vm.products = vm.allProducts;
+          vm.pagination = res.data.pagination;
+        }else if (vm.productList[vm.productType]) {
           vm.products = vm.allProducts.filter(e => {
             return e.category === vm.productList[vm.productType];
           });
+          vm.pagination={}
+          
         } else if (vm.productType === "stared") {
           vm.products = vm.allProducts.filter(e => {
             return vm.stared.includes(e.id);
           });
-        } else {
-          vm.products = vm.allProducts;
+          vm.pagination={}
         }
-
-        vm.pagination = res.data.pagination;
         vm.isLoading = false;
       });
     },
     getProduct(id) {
       this.$router.push({ path: `/product_detail/${id}` });
     },
-    addCouponCode() {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`;
-      let coupon = {
-        code: vm.coupon_code
-      };
-      this.$http.post(api, { data: coupon }).then(res => {
-        // console.log(res);
-        this.getCart();
-      });
-    },
-    changeStared(e, id) {
+    changeStared(e, id, title) {
       e.stopPropagation();
       let vm = this;
+      let msg = {
+        title: `『${title}』已加入關注清單`,
+        content: `謝謝您喜歡『${title}』！`,
+        creat_at: Date.now(),
+        href: `#/product_detail/${id}`
+      };
+
       if (!vm.stared.includes(id)) {
         // 如果此商品尚未在關注清單，就push商品名稱進入清單
         vm.stared.push(id);
+        // 並傳入通知訊息
+        vm.$bus.$emit("message:dropdown", msg);
+        vm.$bus.$emit("message:push", msg.title, "success");
       } else {
         // 如果此商品已經在關注清單，就將他從清單移除
         vm.stared.splice(
@@ -147,12 +157,22 @@ export default {
 
       // 將關注資料存到localStorage
       localStorage.setItem("personalProduct", JSON.stringify(vm.stared));
+
+      // 更新通知icon數量
+      let count = vm.stared.length;
+      vm.$bus.$emit("iconCount:change", "heart", count);
+
       vm.getProducts();
     }
   },
   created() {
-    this.productType = this.$route.params.productType;
-    this.getProducts();
+    const vm = this;
+    vm.productType = vm.$route.params.productType;
+    if (vm.productList[vm.productType]) {
+      vm.getProducts();
+    } else {
+      vm.$router.push({ path: "/" });
+    }
   },
   watch: {
     $route() {
@@ -171,7 +191,7 @@ export default {
       display: flex;
     }
 
-    .heart-regular{
+    .heart-regular {
       display: block;
     }
   }

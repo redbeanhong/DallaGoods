@@ -38,16 +38,3 @@
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    signout: function() {
-      const api = `${process.env.APIPATH}/logout`;
-      const vm = this;
-      this.$http.post(api).then(res => {
-        vm.$router.push("/login");
-      });
-    }
-  }
-};
-</script>

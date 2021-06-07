@@ -6,7 +6,7 @@
           <a
             class="page-link"
             href="#"
-            @click.prevent="getProducts(pagination.current_page - 1)"
+            @click.prevent="getPagination(pagination.current_page - 1)"
             ><i class="fas fa-angle-double-left"></i
           ></a>
         </li>
@@ -16,7 +16,7 @@
           v-for="item in pagination.total_pages"
           :key="item"
         >
-          <a class="page-link" href="#" @click.prevent="getProducts(item)">{{
+          <a class="page-link" href="#" @click.prevent="getPagination(item)">{{
             item
           }}</a>
         </li>
@@ -24,7 +24,7 @@
           <a
             class="page-link"
             href="#"
-            @click.prevent="getProducts(pagination.current_page + 1)"
+            @click.prevent="getPagination(pagination.current_page + 1)"
             ><i class="fas fa-angle-double-right"></i
           ></a>
         </li>
@@ -46,7 +46,7 @@ export default {
     };
   },
   methods:{
-    getProducts(page){
+    getPagination(page){
       this.$emit('getpagination',page)
     }
   }

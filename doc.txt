@@ -1,0 +1,43 @@
+Dalla Goods
+├── build                                 # Webpack 配置檔案
+├── config                                # Vue 基本配置檔案
+├── dist                                  # Webpack輸出完成檔案
+├── node_modules                          # 第三方依賴
+├── src                                   # 專案原始碼（核心檔案）
+│   ├── assets                            # 樣式資料（scss、img）
+│   │   ├── helpers                       # 自定義scss
+│   ├── components                        # 小型組件元件
+│   ├── filters                           # 篩選方法
+│   ├── router                            # 路由
+│   ├── views                             # 獨立頁面元件
+│   │   ├── pages                         # 分頁面資料夾
+│   │   │   ├── AdminCoupon               # 【管理員】優惠券管理
+│   │   │   ├── AdminHome                 # 【管理員】首頁
+│   │   │   ├── AdminLogin                # 【管理員】登入
+│   │   │   ├── AdminOrderList            # 【管理員】訂單管理
+│   │   │   ├── AdminProducts             # 【管理員】商品管理
+│   │   │   ├── CustomerCart              # 【消費者】購物車
+│   │   │   ├── CustomerCheckout          # 【消費者】結帳確定付款方式
+│   │   │   ├── CustomerComment           # 【消費者】購買評價
+│   │   │   ├── CustomerCoupon            # 【消費者】領取優惠券
+│   │   │   ├── CustomerFinished          # 【消費者】結帳完成
+│   │   │   ├── CustomerForm              # 【消費者】結帳填寫資料
+│   │   │   ├── CustomerHome              # 【消費者】首頁
+│   │   │   ├── CustomerNotice            # 【消費者】注意事項
+│   │   │   ├── CustomerOrders            # 【消費者】所有商品
+│   │   │   ├── CustomerProductDetail     # 【消費者】單一商品細節
+│   │   │   ├── CustomerStory             # 【消費者】設計館故事
+│   │   ├── CustomerIndex.vue             # 購物介面主頁面
+│   │   ├── Dashboard.vue                 # 管理員介面主頁面
+│   ├── App.vue                           # 根元件
+│   └── main.js                           # 入口檔案
+├── static                                # 靜態資源
+├── .babelrc                              # babel 編譯配置
+├── .editorconfig                         # 程式碼格式
+├── .gitignore                            # Git 提交忽略的檔案配置
+├── .postcssrc.js                         # 轉換 css 的工具配置檔案
+├── element-variables.css                 # Element 全域性定義的變數
+├── index.html                            # 主頁模板
+├── package-lock.json                     # 用來鎖定依賴的版本號（NPM 自動生成）
+├── package.json                          # 專案基本資訊
+└── README.md                             # 專案介紹

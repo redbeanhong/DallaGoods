@@ -1,0 +1,25 @@
+.img {
+  background-size: cover;
+  background-position: center;
+
+  &.img-small {
+    min-height: 150px;
+    @include media-breakpoint-up(md) {
+      min-height: 100px;
+    }
+  }
+
+  &.img-mid {
+    min-height: 250px;
+    @include media-breakpoint-up(md) {
+      min-height: 200px;
+    }
+  }
+
+  &.img-big {
+    min-height: 350px;
+    @include media-breakpoint-up(md) {
+      min-height: 300px;
+    }
+  }
+}

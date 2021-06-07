@@ -2,31 +2,66 @@
   <div>
     <div id="wine-shop">
       <p class="h3 text-center mb-3">結帳流程</p>
-      <ul class="nav nav-arrow justify-content-around">
-        <li class="nav-item">
-          <router-link class="nav-link" to="./customer_cart"
-            >確認購物車</router-link
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <ul
+            class="nav nav-arrow row justify-content-between align-items-center"
           >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="./customer_form"
-            >填寫資料</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="./customer_checkout"
-            >選擇付款方式</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link last-child" to="./customer_finished"
-            >完成訂購</router-link
-          >
-        </li>
-      </ul>
+            <li class="nav-item col-2 p-0">
+              <router-link class="nav-link text-center" to="/customer_cart"
+                >確認購物車</router-link
+              >
+            </li>
+            <li class="nav-item col-2 p-0">
+              <router-link class="nav-link text-center" to="/customer_form"
+                >填寫資料</router-link
+              >
+            </li>
+            <li class="nav-item col-2 p-0">
+              <a
+                class="nav-link text-center"
+                href="#"
+                :class="{ active: customerCheckout }"
+                >確定付款方式</a
+              >
+            </li>
+            <li class="nav-item col-2 p-0">
+              <router-link
+                class="nav-link text-center last-child"
+                to="/customer_finished"
+                >完成訂購</router-link
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      customerCheckout: false
+    };
+  },
+  methods: {
+    checkUrl() {
+      const vm = this;
+      let url = this.$route.path;
+      if (url.indexOf("customer_checkout") != -1) {
+        vm.customerCheckout = true;
+      } else {
+        vm.customerCheckout = false;
+      }
+    }
+  },
+  created() {
+    this.checkUrl();
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .nav-arrow {
@@ -68,10 +103,11 @@
         border-left: 1rem solid var(--info);
         position: absolute;
         right: -35px;
-        top: 0;
+        top: 50%;
+        transform: translate(0, -50%);
       }
 
-      &.last-child{
+      &.last-child {
         &:before,
         &:after {
           display: none;

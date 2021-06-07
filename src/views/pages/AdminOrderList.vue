@@ -53,7 +53,6 @@ export default {
   data() {
     return {
       orders: [], //呈現在頁面的所有商品清單
-      tempProduct: {}, //暫存新增或修改的商品
       isNew: true, //是否為新增商品
       isLoading: false, //讀取中的效果控制
       fullPage: true,
@@ -70,7 +69,7 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/orders?page=${page}`;
       vm.isLoading = true;
       this.$http.get(api).then(res => {
-        console.log(res);
+        // console.log(res);
         vm.orders = res.data.orders;
         vm.pagination = res.data.pagination;
         vm.isLoading = false;

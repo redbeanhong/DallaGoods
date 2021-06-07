@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         // 如果尚未登入，就轉跳到登入頁面
-        next({ path: "login" });
+        next({ path: "/login" });
       }
     });
   } else {

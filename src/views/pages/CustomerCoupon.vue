@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     copy(code) {
+      const vm = this;
       var dummy = document.createElement("input"),
         text = code;
       document.body.appendChild(dummy);
@@ -78,7 +79,7 @@ export default {
       dummy.select();
       document.execCommand("copy");
       document.body.removeChild(dummy);
-      alert(`優惠碼${code}已複製到剪貼簿，祝您購物愉快！`);
+      vm.$bus.$emit("message:push", `優惠碼${code}已複製到剪貼簿，祝您購物愉快！`,'success');
     }
   }
 };
@@ -89,19 +90,19 @@ export default {
   background-image: radial-gradient(
       circle at 1px 8px,
       transparent 6px,
-      #478ba2 6px,
-      #478ba2 0px
+      var(--primary) 6px,
+      var(--primary) 0px
     ),
     radial-gradient(
       circle at 199px 8px,
       transparent 6px,
-      #478ba2 6px,
-      #478ba2 0px
+      var(--primary) 6px,
+      var(--primary) 0px
     );
   background-size: 200px 18px;
   background-position: 0 0, 200px 0;
   background-repeat-x: no-repeat;
-  color: #fff;
+  color: var(--light);
 }
 .coupon::before {
   position: absolute;

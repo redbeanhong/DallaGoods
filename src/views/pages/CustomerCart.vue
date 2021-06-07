@@ -3,22 +3,30 @@
     <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
     <!-- END OF LOADING -->
+    <div class="container" v-if="!cartIn">
+      <h3 class="text-primary border border-primary rounded p-3 text-center">
+        目前購物車內暫無內容，眾多商品歡迎選購！
+      </h3>
+    </div>
 
-    <div class="container">
+    <div class="container" v-else>
+      <shoppingStep class="mb-4"></shoppingStep>
       <div class="row justify-content-center">
-        <div class="col-md-10 col-12">
-          <shoppingStep class="mb-4"></shoppingStep>
-          
+        <div class="col-md-10 col-10">
+          <!-- 商品內容 -->
           <section class="row mb-4" v-for="item in carts.carts" :key="item.id">
+            <!-- 左商品圖片 -->
             <div class="col-md-4">
               <div
-                class="h-100"
-                style="background-size: cover; background-position: center;"
+                class="h-100 img img-mid"
                 :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
               ></div>
             </div>
+            <!-- END OF 左商品圖片 -->
+
+            <!-- 右商品說明 -->
             <div class="col-md-8">
-              <div class="content border p-3 mb-3">
+              <div class="border p-3 mb-3">
                 <button
                   type="button"
                   class="close"
@@ -40,10 +48,9 @@
                 </blockquote>
                 <div v-if="item.coupon" class="text-success">已套用優惠券</div>
               </div>
-              <div
-                class="d-flex justify-content-between align-items-center border p-3"
-              >
-                <div class="qt-group">
+
+              <div class="d-flex border p-3 justify-content-between">
+                <div class="d-flex align-items-center">
                   <button
                     :disabled="item.qty === 1 || isLoading"
                     class="btn btn-outline-primary"
@@ -53,7 +60,7 @@
                   >
                     <i class="fas fa-minus"></i>
                   </button>
-                  <span class="mx-5">{{ item.qty }}</span>
+                  <span class="mx-2">{{ item.qty }}</span>
                   <button
                     class="btn btn-outline-primary"
                     :disabled="isLoading"
@@ -65,17 +72,19 @@
                   </button>
                 </div>
 
-                <div class="price-group d-flex">
-                  <p class="px-5 py-2 m-0">
-                    NT{{ item.product.price | Currency }}
-                  </p>
-                  <p class="bg-primary px-5 py-2 m-0 text-light">
+                <div class="d-sm-flex align-items-center">
+                  <p class="m-0 p-2">NT{{ item.product.price | Currency }}</p>
+                  <p class="bg-primary m-0 text-light p-2">
                     NT{{ (item.product.price * item.qty) | Currency }}
                   </p>
                 </div>
               </div>
             </div>
+            <!-- END OF 右商品說明 -->
           </section>
+          <!-- END OF 商品內容 -->
+
+          <!-- 優惠碼輸入 -->
           <section class="row mb-4">
             <div class="col-md-12">
               <div class="input-group">
@@ -100,6 +109,9 @@
               </div>
             </div>
           </section>
+          <!-- END OF 優惠碼輸入 -->
+
+          <!-- 結帳價格 -->
           <section class="row">
             <div class="col-md-3">
               <p class="text-success" v-if="carts.final_total !== carts.total">
@@ -128,6 +140,7 @@
               </div>
             </div>
           </section>
+          <!-- END OF 結帳價格 -->
         </div>
       </div>
     </div>
@@ -147,16 +160,32 @@ export default {
       status: {
         loadingItem: ""
       },
-      coupon_code: ""
+      coupon_code: "",
+      cartIn: true
     };
   },
   methods: {
     getCart() {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      let count = 0;
+
       vm.isLoading = true;
+
       this.$http.get(api).then(res => {
         // console.log(res);
+        if (!res.data.data.carts[0]) {
+          vm.cartIn = false;
+        } else {
+          count = res.data.data.carts
+            .map(item => item.qty)
+            .reduce((total, e) => {
+              return total + e;
+            }, 0);
+        }
+
+        vm.$bus.$emit("carts:Update", count);
+
         vm.carts = res.data.data;
         vm.carts.carts.sort(function(a, b) {
           return a.product.title.localeCompare(b.product.title);
@@ -186,12 +215,12 @@ export default {
     removeCartItem(itemId) {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${itemId}`;
-      // this.status.loadingItem = itemId;
+      vm.isLoading = true;
       this.$http.delete(api).then(res => {
         // console.log(res);
         this.getCart();
         setTimeout(() => {
-          // vm.status.loadingItem = "";
+          vm.isLoading = false;
         }, 300);
       });
     },
@@ -207,8 +236,9 @@ export default {
         this.getCart();
       });
     }
-  },components:{
-    ShoppingStep,
+  },
+  components: {
+    ShoppingStep
   },
   created() {
     this.getCart();

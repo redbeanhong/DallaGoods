@@ -3,9 +3,9 @@
     <nav
       class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow navbar-expand-lg"
     >
-      <a class="navbar-brand col-6 col-sm-3 col-lg-2 mr-0" href="#"
+      <router-link class="navbar-brand col-6 col-sm-3 col-lg-2 mr-0" to="/admin"
         ><img src="../assets/logo.jpg" width="30" height="30" alt="LOGO" />
-        後臺系統</a
+        後臺系統</router-link
       >
       <button
         class="navbar-toggler"
@@ -24,7 +24,7 @@
       >
         <ul class="navbar-nav px-3">
           <li class="nav-item d-md-none">
-            <router-link class="nav-link" to="/admin/products"
+            <router-link class="nav-link" to="/admin/"
               ><i class="fas fa-box-open mr-1"></i>產品列表</router-link
             >
           </li>
@@ -44,7 +44,7 @@
             >
           </li>
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#" @click.prevent="signout">Sign out</a>
+            <a class="nav-link" href="#" @click.prevent="signout">登出</a>
           </li>
         </ul>
       </div>

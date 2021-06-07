@@ -4,21 +4,19 @@
     <loading :active.sync="isLoading"></loading>
     <!-- END OF LOADING -->
     <div class="container">
-      <div class="row mb-5 border-bottom border-primary p-3" v-for="item in comments" :key="item.creatAt">
+      <div class="row mb-5 border-bottom border-primary p-3 justify-content-center" v-for="item in comments" :key="item.creatAt">
         <div class="col-md-2">
-          <div class="m-auto w-50" style="height: 100px; background-size: cover; background-position: center;" :class="item.photoUrl"></div>
+          <div class="m-auto w-50 img img-small" :class="item.photoUrl"></div>
           <p class="text-primary text-center">{{item.name}}</p>
-        </div>
-        <div class="col-md-6">
-          {{item.content}}
-        </div>
-        <div class="col-md-2">
-          <div class="heart-group text-center text-md-left">
+          <div class="heart-group text-center">
             <i class="fas fa-heart text-danger mr-1" v-for="num in item.score" :key="num"></i>
           </div>
         </div>
+        <div class="col-md-6 mb-3">
+          {{item.content}}
+        </div>
         <div class="col-md-2 text-right">
-          <div class="mb-2" style="height: 150px; background-size: cover; background-position: center;" :class="item.imageUrl"></div>
+          <div class="mb-2 img img-mid" :class="item.imageUrl"></div>
           {{item.creatAt}}
         </div>
       </div>

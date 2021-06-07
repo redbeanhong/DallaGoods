@@ -36,7 +36,7 @@
           <button
             type="button"
             class="btn btn-primary btn-block my-3"
-            @click="addToCart(product.id, product.num)"
+            @click="addToCart(product.id, product.num, product.title)"
           >
             <i
               class="fas fa-spinner fa-spin"
@@ -46,21 +46,16 @@
           </button>
           <button
             type="button"
-            class="btn btn-danger btn-block my-3"
-            @click="changeStared(product.id)"
-            v-if="stared.includes(product.id)"
+            class="btn btn-block my-3"
+            :class="{
+              'btn-danger': stared.includes(product.id),
+              'btn-outline-primary': !stared.includes(product.id)
+            }"
+            @click="changeStared(product.id, product.title)"
           >
             <i class="fas fa-heart"></i>
-            已收藏商品
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-primary btn-block my-3"
-            @click="changeStared(product.id)"
-            v-else
-          >
-            <i class="fas fa-heart"></i>
-            收藏商品
+            <span v-if="stared.includes(product.id)">已收藏商品</span>
+            <span v-else>收藏商品</span>
           </button>
           <ul>
             <li>付款後，從備貨到寄出商品為 3 個工作天。（不包含假日）</li>
@@ -92,7 +87,7 @@ export default {
       },
       isLoading: false, //讀取中的效果控制
       fullPage: true,
-      stared: JSON.parse(localStorage.getItem("personalProduct")) || [],
+      stared: JSON.parse(localStorage.getItem("personalProduct")) || []
     };
   },
   methods: {
@@ -108,9 +103,12 @@ export default {
         vm.isLoading = false;
       });
     },
-    addToCart(id, qty = 1) {
+    addToCart(id, qty = 1, title) {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      let msg = {
+        title: `『${title}』已加入購物車`,
+      };
       let cart = {
         product_id: id,
         qty
@@ -120,13 +118,24 @@ export default {
         // console.log(res);
         $("#productModal").modal("hide");
         vm.status.loadingItem = "";
+        vm.$bus.$emit("message:push", msg.title, "success");
+        vm.$bus.$emit("carts:Update");
       });
     },
-    changeStared(id) {
+    changeStared(id, title) {
       let vm = this;
+      let msg = {
+        title: `『${title}』已加入關注清單`,
+        content: `謝謝您喜歡『${title}』！`,
+        creat_at: Date.now(),
+        href: `#/product_detail/${id}`
+      };
+
       if (!vm.stared.includes(id)) {
         // 如果此商品尚未在關注清單，就push商品名稱進入清單
         vm.stared.push(id);
+        vm.$bus.$emit("message:dropdown", msg);
+        vm.$bus.$emit("message:push", msg.title, "success");
       } else {
         // 如果此商品已經在關注清單，就將他從清單移除
         vm.stared.splice(
@@ -137,7 +146,7 @@ export default {
 
       // 將關注資料存到localStorage
       localStorage.setItem("personalProduct", JSON.stringify(vm.stared));
-      console.log(vm.stared);
+      // console.log(vm.stared);
     }
   },
   created() {
