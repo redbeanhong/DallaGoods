@@ -40,12 +40,11 @@ export default {
   data() {
     return {
       user: {
-        username:
-          JSON.parse(localStorage.getItem("personalUserName")).userName || "",
+        username:"",
         password: ""
       },
       remember:
-        JSON.parse(localStorage.getItem("personalUserName")).remember || false
+        false
     };
   },
   methods: {
@@ -87,6 +86,12 @@ export default {
           vm.$router.push("/admin");
         }
       });
+    },checkRemember(){
+      const vm = this;
+      if (JSON.parse(localStorage.getItem("personalUserName")).remember) {
+        vm.remember = JSON.parse(localStorage.getItem("personalUserName")).remember;
+        vu.user.username = JSON.parse(localStorage.getItem("personalUserName")).userName;
+      }
     }
   },
   created() {
