@@ -95,6 +95,7 @@
                   aria-label="輸入優惠碼"
                   aria-describedby="button-addon2"
                   v-model="coupon_code"
+                  :class="couponClass"
                 />
                 <div class="input-group-append">
                   <button
@@ -161,7 +162,8 @@ export default {
         loadingItem: ""
       },
       coupon_code: "",
-      cartIn: true
+      cartIn: true,
+      couponClass:'',
     };
   },
   methods: {
@@ -232,8 +234,14 @@ export default {
       };
       this.$http.post(api, { data: coupon }).then(res => {
         // console.log(res);
-        vm.coupon_code = `已使用優惠券${vm.coupon_code}`;
-        this.getCart();
+        if ((res.data.success)) {
+          vm.coupon_code = `已使用優惠券${vm.coupon_code}`;
+          vm.couponClass='is-valid';
+          vm.getCart();
+        } else {
+          vm.$bus.$emit("message:push", res.data.message);
+          vm.couponClass='is-invalid';
+        }
       });
     }
   },

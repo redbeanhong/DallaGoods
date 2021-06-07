@@ -100,7 +100,6 @@ export default {
 
       if (vm.productType === "all") {
         api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
-        console.log('all');
       }
 
       vm.isLoading = true;
