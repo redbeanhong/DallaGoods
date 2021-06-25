@@ -51,53 +51,52 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       msg: [
         {
-          title: "歡迎來到Dalla Goods！",
+          title: '歡迎來到Dalla Goods！',
           content:
-            "這裡有多樣精心製作的手作小物，每一個都是獨一無二的，希望您會喜歡。",
+            '這裡有多樣精心製作的手作小物，每一個都是獨一無二的，希望您會喜歡。',
           creat_at: Date.now(),
-          href: "#"
+          href: '#'
         }
       ]
-    };
+    }
   },
   props: {
     msgOpen: { type: Boolean, default: false }
   },
   methods: {
-    deleteMsg(e, index) {
-      e.stopPropagation();
-      const vm = this;
-      if (index === "all") {
-        vm.msg = [];
+    deleteMsg (e, index) {
+      e.stopPropagation()
+      const vm = this
+      if (index === 'all') {
+        vm.msg = []
       } else {
-        vm.msg.splice(index, 1);
+        vm.msg.splice(index, 1)
       }
-      // console.log(vm.msg);
-      vm.updateIconCount();
+      vm.updateIconCount()
     },
-    updateMessage(message) {
-      const vm = this;
-      vm.msg.push(message);
-      vm.updateIconCount();
+    updateMessage (message) {
+      const vm = this
+      vm.msg.push(message)
+      vm.updateIconCount()
     },
-    updateIconCount() {
-      const vm = this;
-      let count = vm.msg.length;
-      vm.$emit("msgCount", count, "msg");
+    updateIconCount () {
+      const vm = this
+      const count = vm.msg.length
+      vm.$emit('msgCount', count, 'msg')
     }
   },
-  created() {
-    let vm = this;
-    vm.$bus.$on("message:dropdown", message => {
-      vm.updateMessage(message);
-    });
-    vm.updateIconCount();
+  created () {
+    const vm = this
+    vm.$bus.$on('message:dropdown', message => {
+      vm.updateMessage(message)
+    })
+    vm.updateIconCount()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -113,7 +112,7 @@ export default {
   bottom: 100%;
   right: 20px;
   border: solid transparent;
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;

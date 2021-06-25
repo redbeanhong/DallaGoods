@@ -35,18 +35,16 @@
 </template>
 
 <script>
-// import $ from "jquery";
-
 export default {
   props: {
     carts: {
       type: Object
-    },
+    }
   },
-  data() {
+  data () {
     return {
-      cartsList: this.carts //呈現在頁面的所有商品清單
-    };
-  },
-};
+      cartsList: this.carts // 呈現在頁面的所有商品清單
+    }
+  }
+}
 </script>

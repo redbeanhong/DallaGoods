@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-primary align-items-center">
       <!-- LOGO -->
       <router-link class="navbar-brand order-1" to="/"
-        ><img src="../assets/logo.jpg" width="50" height="50" alt="LOGO"
+        ><img src="../assets/img/logo.jpg" width="50" height="50" alt="LOGO"
       /></router-link>
       <!-- END OF LOGO -->
 
@@ -60,10 +60,7 @@
       <ul class="navbar-nav ml-auto mt-lg-0 flex-row order-2 order-lg-4">
         <!-- SELLS -->
         <li class="nav-item">
-          <router-link
-            class="nav-link nav-link-icon fa-stack"
-            to="/admin"
-          >
+          <router-link class="nav-link nav-link-icon fa-stack" to="/admin">
             <i class="fas fa-user-tie fa-stack-1x xfa-inverse"></i>
           </router-link>
         </li>
@@ -93,10 +90,10 @@
             :data-count="iconCount.msg"
             ><i class="fas fa-bell fa-stack-1x xfa-inverse"></i
           ></a>
-          <dropdownMessage
+          <DropdownMessage
             :msgOpen="msgOpen"
             @msgCount="iconUpdate"
-          ></dropdownMessage>
+          ></DropdownMessage>
         </li>
         <!-- END OF MESSAGE -->
 
@@ -119,55 +116,54 @@
 </template>
 
 <script>
-import DropdownMessage from "./DropdownMessage";
+import DropdownMessage from './DropdownMessage'
 
 export default {
-  data() {
+  data () {
     return {
       msgOpen: false,
       iconCount: {
         msg: 0,
         carts: 0
       }
-    };
+    }
   },
   methods: {
-    iconUpdate(count, type) {
-      this.iconCount[type] = count;
+    iconUpdate (count, type) {
+      this.iconCount[type] = count
     },
-    getCart() {
-      const vm = this;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      let count = 0;
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      let count = 0
 
-      this.$http.get(api).then(res => {
-        // console.log(res);
+      vm.$http.get(api).then(res => {
         if (res.data.data.carts[0]) {
           count = res.data.data.carts
             .map(item => item.qty)
             .reduce((total, e) => {
-              return total + e;
-            }, 0);
+              return total + e
+            }, 0)
         }
-        vm.iconUpdate(count, "carts");
-      });
+        vm.iconUpdate(count, 'carts')
+      })
     }
   },
   components: {
     DropdownMessage
   },
-  created() {
-    let vm = this;
-    vm.$bus.$on("carts:Update", count => {
+  created () {
+    const vm = this
+    vm.$bus.$on('carts:Update', count => {
       if (count >= 0) {
-        vm.iconUpdate(count, "carts");
+        vm.iconUpdate(count, 'carts')
       } else {
-        vm.getCart();
+        vm.getCart()
       }
-    });
-    vm.getCart();
+    })
+    vm.getCart()
   }
-};
+}
 </script>
 
 <style lang="scss">

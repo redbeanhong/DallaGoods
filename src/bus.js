@@ -1,5 +1,5 @@
-import Vue from "vue";
-Vue.prototype.$bus = new Vue();
+import Vue from 'vue'
+Vue.prototype.$bus = new Vue()
 
 // 元件-警告(AlertMessage)
 // 自定義名稱 'messsage:push'
@@ -13,4 +13,3 @@ Vue.prototype.$bus = new Vue();
 // 元件-NAV(CustomerNavbar)
 // 自定義名稱 'carts:Update'
 // count: 購物車內容數量
-

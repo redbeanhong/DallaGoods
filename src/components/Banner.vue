@@ -7,13 +7,25 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../assets/banner.jpg" class="d-block w-100" alt="banner" />
+          <img
+            src="../assets/img/banner.jpg"
+            class="d-block w-100"
+            alt="banner"
+          />
         </div>
         <div class="carousel-item">
-          <img src="../assets/banner2.jpg" class="d-block w-100" alt="banner" />
+          <img
+            src="../assets/img/banner2.jpg"
+            class="d-block w-100"
+            alt="banner"
+          />
         </div>
         <div class="carousel-item">
-          <img src="../assets/banner3.jpg" class="d-block w-100" alt="banner" />
+          <img
+            src="../assets/img/banner3.jpg"
+            class="d-block w-100"
+            alt="banner"
+          />
         </div>
       </div>
       <a
@@ -37,4 +49,3 @@
     </div>
   </div>
 </template>
-

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav aria-label="Page navigation example" v-if="pagination.total_pages>1">
+    <nav aria-label="Page navigation example" v-if="pagination.total_pages > 1">
       <ul class="pagination">
         <li class="page-item" :class="{ disabled: !pagination.has_pre }">
           <a
@@ -40,15 +40,15 @@ export default {
       type: Object
     }
   },
-  data() {
+  data () {
     return {
-      newPagination: this.pagination,
-    };
+      newPagination: this.pagination
+    }
   },
-  methods:{
-    getPagination(page){
-      this.$emit('getpagination',page)
+  methods: {
+    getPagination (page) {
+      this.$emit('getpagination', page)
     }
   }
-};
+}
 </script>

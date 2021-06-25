@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="container">
-      <navbar></navbar>
+      <CustomerNavbar></CustomerNavbar>
     </div>
 
-    <alert></alert>
+    <AlertMessage></AlertMessage>
 
     <div class="container">
-      <banner></banner>
+      <Banner></Banner>
     </div>
 
     <div class="container">
-      <infobar></infobar>
+      <Infobar></Infobar>
     </div>
 
     <main role="main">
@@ -21,32 +21,32 @@
     </main>
 
     <div class="container">
-      <footerinfo></footerinfo>
+      <FooterSample></FooterSample>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from "../components/CustomerNavbar";
-import Infobar from "../components/Infobar";
-import Banner from "../components/Banner";
-import Alert from "../components/AlertMessage";
-import Footerinfo from "../components/Footer.vue";
+import CustomerNavbar from '@/components/CustomerNavbar'
+import Infobar from '@/components/Infobar'
+import Banner from '@/components/Banner'
+import AlertMessage from '@/components/AlertMessage'
+import FooterSample from '@/components/FooterSample.vue'
 
 export default {
-  created() {
+  created () {
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    this.$http.defaults.headers.common.Authorization = `${token}`; //之後發送的每次請求，預設都會加入此欄位
+      '$1'
+    )
+    this.$http.defaults.headers.common.Authorization = `${token}` // 之後發送的每次請求，預設都會加入此欄位
   },
   components: {
-    Navbar,
+    CustomerNavbar,
     Infobar,
     Banner,
-    Alert,
-    Footerinfo
-  },
-};
+    AlertMessage,
+    FooterSample
+  }
+}
 </script>

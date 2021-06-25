@@ -4,7 +4,7 @@
       class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow navbar-expand-lg"
     >
       <router-link class="navbar-brand col-6 col-sm-3 col-lg-2 mr-0" to="/admin"
-        ><img src="../assets/logo.jpg" width="30" height="30" alt="LOGO" />
+        ><img src="../assets/img/logo.jpg" width="30" height="30" alt="LOGO" />
         後臺系統</router-link
       >
       <button
@@ -55,15 +55,15 @@
 <script>
 export default {
   methods: {
-    signout: function() {
-      const api = `${process.env.APIPATH}/logout`;
-      const vm = this;
-      this.$http.post(api).then(res => {
-        vm.$router.push("/login");
-      });
+    signout: function () {
+      const api = `${process.env.VUE_APP_APIPATH}/logout`
+      const vm = this
+      vm.$http.post(api).then(res => {
+        vm.$router.push('/login')
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

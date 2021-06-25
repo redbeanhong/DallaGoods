@@ -41,26 +41,26 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       customerCheckout: false
-    };
+    }
   },
   methods: {
-    checkUrl() {
-      const vm = this;
-      let url = this.$route.path;
-      if (url.indexOf("customer_checkout") != -1) {
-        vm.customerCheckout = true;
+    checkUrl () {
+      const vm = this
+      const url = vm.$route.path
+      if (url.indexOf('customer_checkout') !== -1) {
+        vm.customerCheckout = true
       } else {
-        vm.customerCheckout = false;
+        vm.customerCheckout = false
       }
     }
   },
-  created() {
-    this.checkUrl();
+  created () {
+    this.checkUrl()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -86,7 +86,7 @@ export default {
       }
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         background-color: var(--info);
         width: 25px;
@@ -97,7 +97,7 @@ export default {
       }
 
       &:before {
-        content: "";
+        content: '';
         border-top: 20px solid transparent;
         border-bottom: 20px solid transparent;
         border-left: 1rem solid var(--info);
