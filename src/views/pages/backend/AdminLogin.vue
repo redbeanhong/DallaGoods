@@ -43,12 +43,10 @@ export default {
   data () {
     return {
       user: {
-        username:
-          JSON.parse(localStorage.getItem('personalUserName')).userName || '',
+        username: '',
         password: ''
       },
-      remember:
-        JSON.parse(localStorage.getItem('personalUserName')).remember || false
+      remember: false
     }
   },
   components: {
@@ -95,17 +93,20 @@ export default {
           )
           vm.$router.push('/admin')
         }
+        vm.checkRemember()
       })
     },
     checkRemember () {
       const vm = this
-      if (JSON.parse(localStorage.getItem('personalUserName')).remember) {
-        vm.remember = JSON.parse(
-          localStorage.getItem('personalUserName')
-        ).remember
-        vm.user.username = JSON.parse(
-          localStorage.getItem('personalUserName')
-        ).userName
+      if (JSON.parse(localStorage.getItem('personalUserName')) !== null) {
+        if (JSON.parse(localStorage.getItem('personalUserName')).remember) {
+          vm.remember = JSON.parse(
+            localStorage.getItem('personalUserName')
+          ).remember
+          vm.user.username = JSON.parse(
+            localStorage.getItem('personalUserName')
+          ).userName
+        }
       }
     }
   },

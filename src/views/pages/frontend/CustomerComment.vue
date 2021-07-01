@@ -99,18 +99,18 @@ export default {
 }
 
 .imageProduct1 {
-  background-image: url('../../../assets/img/product1.png');
+  background-image: url('../../../assets/img/product1.jpg');
 }
 .imageProduct2 {
-  background-image: url('../../../assets/img/product2.png');
+  background-image: url('../../../assets/img/product2.jpg');
 }
 .imageProduct3 {
-  background-image: url('../../../assets/img/product3.png');
+  background-image: url('../../../assets/img/product3.jpg');
 }
 .imageProduct4 {
-  background-image: url('../../../assets/img/product4.png');
+  background-image: url('../../../assets/img/product4.jpg');
 }
 .imageProduct5 {
-  background-image: url('../../../assets/img/product5.png');
+  background-image: url('../../../assets/img/product5.jpg');
 }
 </style>

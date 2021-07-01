@@ -143,7 +143,7 @@ export default {
         msg: 0,
         carts: 0
       },
-      cart: JSON.parse(localStorage.getItem('personalCart')) || {}
+      cart: { products: [] }
     }
   },
   methods: {
@@ -153,13 +153,15 @@ export default {
     getCart () {
       const vm = this
       let count = 0
-      vm.cart = JSON.parse(localStorage.getItem('personalCart'))
+      if (JSON.parse(localStorage.getItem('personalCart')) !== null) {
+        vm.cart = JSON.parse(localStorage.getItem('personalCart'))
 
-      count = vm.cart.products
-        .map(item => item.num)
-        .reduce((total, e) => {
-          return total + e
-        }, 0)
+        count = vm.cart.products
+          .map(item => item.num)
+          .reduce((total, e) => {
+            return total + e
+          }, 0)
+      }
       vm.iconUpdate(count, 'carts')
     }
   },

@@ -2,6 +2,17 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
+    <div class="container" id="stared__none">
+      <p class="h3 text-primary border border-primary rounded p-3 text-center">
+        目前關注清單暫無內容，眾多商品歡迎選購！
+        <router-link class="nav-link text-danger" to="/customer_orders/all"
+          >點我來去逛逛<i class="far fa-hand-point-left"></i
+          ><i class="far fa-hand-point-left"></i
+          ><i class="far fa-hand-point-left"></i
+        ></router-link>
+      </p>
+    </div>
+
     <!-- CARD -->
     <div class="row mt-4">
       <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
@@ -99,6 +110,9 @@ export default {
           return e.is_enabled === 1
         })
 
+        const staredArea = document.querySelector('#stared__none')
+        staredArea.classList.remove('active')
+
         if (vm.productType === 'all') {
           vm.products = vm.allProducts
           vm.pagination = res.data.pagination
@@ -108,6 +122,11 @@ export default {
           })
           vm.pagination = {}
         } else if (vm.productType === 'stared') {
+          if (vm.stared.length===0 || vm.stared === null) {
+            staredArea.classList.add('active')
+          } else {
+            staredArea.classList.remove('active')
+          }
           vm.products = vm.allProducts.filter(e => {
             return vm.stared.includes(e.id)
           })
@@ -153,7 +172,7 @@ export default {
   created () {
     const vm = this
     vm.productType = vm.$route.params.productType
-    if (vm.productList[vm.productType]) {
+    if (vm.productList[vm.productType] || vm.productType === 'stared') {
       vm.getProducts()
     } else {
       vm.$router.push({ path: '/' })
@@ -207,6 +226,12 @@ export default {
       margin: 0;
       display: block;
     }
+  }
+}
+#stared__none {
+  display: none;
+  &.active {
+    display: block;
   }
 }
 </style>
