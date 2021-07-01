@@ -24,7 +24,7 @@
       >
         <ul class="navbar-nav px-3">
           <li class="nav-item d-md-none">
-            <router-link class="nav-link" to="/admin/"
+            <router-link class="nav-link" to="/admin/products"
               ><i class="fas fa-box-open mr-1"></i>產品列表</router-link
             >
           </li>
@@ -78,21 +78,5 @@ export default {
   .navbar-brand {
     background-color: rgba(0, 0, 0, 0.25);
   }
-}
-.navbar .form-control {
-  padding: 0.75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
-}
-
-.form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 </style>

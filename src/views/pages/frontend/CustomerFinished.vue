@@ -17,7 +17,7 @@
               to="/customer_orders/all"
               class="btn btn-primary btn-lg"
               role="button"
-              >繼續逛</router-link
+              >繼續逛逛</router-link
             >
           </div>
         </div>

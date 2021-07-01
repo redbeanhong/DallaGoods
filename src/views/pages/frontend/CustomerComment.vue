@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- LOADING -->
-    <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
     <div class="container">
       <div
         class="row mb-5 border-bottom border-primary p-3 justify-content-center"
@@ -78,16 +75,13 @@ export default {
           content: '作品質量很好，朕喜歡。',
           score: 5
         }
-      ],
-      isLoading: false, // 讀取中的效果控制
-      fullPage: true,
-      ddd: ''
+      ]
     }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 .imagePhoto1 {
   background-image: url('../../../assets/img/photo1.jpg');
 }

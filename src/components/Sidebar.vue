@@ -4,10 +4,10 @@
       id="sidebarMenu"
       class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse navbar-light nav-pills"
     >
-      <div class="sidebar-sticky pt-3">
+      <div class="sidebar--sticky pt-3">
         <!-- 管理員 -->
         <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+          class="sidebar__heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
         >
           <span>管理員</span>
           <a
@@ -39,7 +39,7 @@
 
         <!-- 購物頁面 -->
         <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+          class="sidebar__heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
         >
           <span>購物頁面</span>
           <a
@@ -57,17 +57,13 @@
             >
           </li>
         </ul>
-        <!-- END OF 模擬功能 -->
+        <!-- END OF 購物頁面 -->
       </div>
     </nav>
   </div>
 </template>
 
 <style lang="scss" scoped>
-/*
- * Sidebar
- */
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -84,7 +80,7 @@
   }
 }
 
-.sidebar-sticky {
+.sidebar--sticky {
   position: relative;
   top: 0;
   height: calc(100vh - 48px);
@@ -94,7 +90,7 @@
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
+  .sidebar--sticky {
     position: -webkit-sticky;
     position: sticky;
   }
@@ -113,7 +109,7 @@
   color: inherit;
 }
 
-.sidebar-heading {
+.sidebar__heading {
   font-size: 0.75rem;
   text-transform: uppercase;
 }

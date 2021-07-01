@@ -5,29 +5,29 @@
       class="carousel slide"
       data-ride="carousel"
     >
-      <div class="carousel-inner">
-        <div class="carousel-item active">
+      <ul class="carousel-inner list-unstyled">
+        <li class="carousel-item active">
           <img
             src="../assets/img/banner.jpg"
             class="d-block w-100"
             alt="banner"
           />
-        </div>
-        <div class="carousel-item">
+        </li>
+        <li class="carousel-item">
           <img
             src="../assets/img/banner2.jpg"
             class="d-block w-100"
             alt="banner"
           />
-        </div>
-        <div class="carousel-item">
+        </li>
+        <li class="carousel-item">
           <img
             src="../assets/img/banner3.jpg"
             class="d-block w-100"
             alt="banner"
           />
-        </div>
-      </div>
+        </li>
+      </ul>
       <a
         class="carousel-control-prev"
         href="#carouselExampleControls"

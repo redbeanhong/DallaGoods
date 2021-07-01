@@ -1,0 +1,20 @@
+.icon--mid {
+  font-size: 18px;
+}
+
+.icon--count[data-count]:after {
+  $count--size: 5px;
+  position: absolute;
+  right: 0%;
+  top: 20%;
+  content: attr(data-count);
+  font-size: $count--size;
+  width: $count--size * 3;
+  height: $count--size * 3;
+  border-radius: 50%;
+  line-height: $count--size * 3;
+  text-align: center;
+  color: var(--light);
+  background: var(--danger);
+  text-align: center;
+}

@@ -1,12 +1,16 @@
 <template>
   <div>
-    <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
-    <div class="container" v-if="!cartIn">
-      <h3 class="text-primary border border-primary rounded p-3 text-center">
+
+    <div class="container" v-if="cart.products.length === 0">
+      <p class="h3 text-primary border border-primary rounded p-3 text-center">
         目前購物車內暫無內容，眾多商品歡迎選購！
-      </h3>
+        <router-link class="nav-link text-danger" to="/customer_orders/all"
+          >點我來去逛逛<i class="far fa-hand-point-left"></i
+          ><i class="far fa-hand-point-left"></i
+          ><i class="far fa-hand-point-left"></i
+        ></router-link>
+      </p>
     </div>
 
     <div class="container" v-else>
@@ -14,12 +18,16 @@
       <div class="row justify-content-center">
         <div class="col-md-10 col-10">
           <!-- 商品內容 -->
-          <section class="row mb-4" v-for="item in carts.carts" :key="item.id">
+          <section
+            class="row mb-4"
+            v-for="item in cart.products"
+            :key="item.id"
+          >
             <!-- 左商品圖片 -->
             <div class="col-md-4">
               <div
                 class="h-100 img img-mid"
-                :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
+                :style="{ backgroundImage: `url(${item.imageUrl})` }"
               ></div>
             </div>
             <!-- END OF 左商品圖片 -->
@@ -30,20 +38,20 @@
                 <button
                   type="button"
                   class="close"
-                  @click="removeCartItem(item.id)"
+                  @click="changeCart(item.id, 0, item.title)"
                 >
                   <i
                     class="fas fa-spinner fa-spin"
                     v-if="status.loadingItem === item.id"
                   ></i>
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true" v-else>&times;</span>
                 </button>
                 <blockquote class="blockquote text-left">
                   <p class="mb-0">
-                    {{ item.product.title }}
+                    {{ item.title }}
                   </p>
                   <footer class="blockquote-footer pl-5">
-                    {{ item.product.description }}
+                    {{ item.description }}
                   </footer>
                 </blockquote>
                 <div v-if="item.coupon" class="text-success">已套用優惠券</div>
@@ -53,27 +61,30 @@
                 <div class="d-flex align-items-center">
                   <button
                     type="button"
-                    :disabled="item.qty === 1 || isLoading"
+                    :disabled="item.num === 1 || isLoading"
+                    :class="{ 'input--disabled': item.num === 1 || isLoading }"
                     class="btn btn-outline-primary"
-                    @click="changeCart(item.product_id, item.qty - 1, item.id)"
+                    @click="changeCart(item.id, -1, item.title)"
                   >
                     <i class="fas fa-minus"></i>
                   </button>
-                  <span class="mx-2">{{ item.qty }}</span>
+                  <span class="mx-2">{{ item.num }}</span>
                   <button
                     type="button"
                     class="btn btn-outline-primary"
                     :disabled="isLoading"
-                    @click="changeCart(item.product_id, item.qty + 1, item.id)"
+                    @click="changeCart(item.id, +1, item.title)"
                   >
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
 
                 <div class="d-sm-flex align-items-center">
-                  <p class="m-0 p-2">NT{{ item.product.price | Currency }}</p>
-                  <p class="bg-primary m-0 text-light p-2">
-                    NT{{ (item.product.price * item.qty) | Currency }}
+                  <p class="m-0 p-2 border-right text-gray small">
+                    NT{{ item.price | Currency }}/{{ item.unit }}
+                  </p>
+                  <p class="m-0 p-2 text-primary h5">
+                    NT{{ (item.price * item.num) | Currency }}
                   </p>
                 </div>
               </div>
@@ -82,61 +93,19 @@
           </section>
           <!-- END OF 商品內容 -->
 
-          <!-- 優惠碼輸入 -->
-          <section class="row mb-4">
-            <div class="col-md-12">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入優惠碼"
-                  aria-label="輸入優惠碼"
-                  aria-describedby="button-addon2"
-                  v-model="coupon_code"
-                  :class="couponClass"
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    id="button-addon2"
-                    @click="addCouponCode"
-                  >
-                    使用優惠券
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-          <!-- END OF 優惠碼輸入 -->
-
           <!-- 結帳價格 -->
-          <section class="row">
-            <div class="col-md-3">
-              <p class="text-success" v-if="carts.final_total !== carts.total">
-                已折扣:
-                <span
-                  >NT{{ (carts.final_total - carts.total) | Currency }}</span
-                >
+          <section class="row justify-content-end">
+            <div class="col-4 text-center">
+              <p class="h3 border-bottom mb-3 p-3">
+                總計: <span>NT{{ cart.total | Currency }}</span>
               </p>
-            </div>
-            <div class="col-md-9 d-flex justify-content-end">
-              <div class="text-center">
-                <p class="h3 border-bottom mb-3 p-3">
-                  總計: <span>NT{{ carts.total | Currency }}</span>
-                </p>
-                <p
-                  class="h2 text-success mb-3"
-                  v-if="carts.final_total !== carts.total"
-                >
-                  折扣價: <span>NT{{ carts.final_total | Currency }}</span>
-                </p>
-                <router-link class="nav-link" to="/customer_form"
-                  ><button type="button" class="btn btn-primary btn-lg">
-                    結帳去
-                  </button>
-                </router-link>
-              </div>
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                @click="addToCart"
+              >
+                結帳去
+              </button>
             </div>
           </section>
           <!-- END OF 結帳價格 -->
@@ -152,88 +121,70 @@ import ShoppingStep from '@/components/ShoppingStep.vue'
 export default {
   data () {
     return {
-      isLoading: false, // 讀取中的效果控制
+      isLoading: false,
       fullPage: true,
-      carts: {}, // 呈現在頁面的所有商品清單
+      cart: JSON.parse(localStorage.getItem('personalCart')) || {},
       status: {
         loadingItem: ''
-      },
-      coupon_code: '',
-      cartIn: true,
-      couponClass: ''
+      }
     }
   },
   methods: {
-    getCart () {
+    changeCart (productID, changeQty, productTitle) {
+      const vm = this
+      const productIndex = vm.cart.products.findIndex(e => e.id === productID)
+      const msg = {
+        title: ''
+      }
+      vm.status.loadingItem = productID
+
+      if (changeQty === 0) {
+        vm.cart.products.splice(productIndex, 1)
+        msg.title = `『${productTitle}』已至購物車移除`
+      } else {
+        vm.cart.products[productIndex].num += changeQty
+        msg.title = `『${productTitle}』數量已更新`
+      }
+      vm.updateTotal()
+      localStorage.setItem('personalCart', JSON.stringify(vm.cart))
+
+      setTimeout(function () {
+        vm.status.loadingItem = ''
+      }, 500)
+
+      vm.$bus.$emit('message:push', msg.title, 'success')
+      vm.$bus.$emit('carts:Update')
+    },
+    updateTotal () {
+      const vm = this
+      vm.cart.total = vm.cart.products.reduce((total, e) => {
+        return total + e.price * e.num
+      }, 0)
+    },
+    addToCart () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      let count = 0
-
-      vm.isLoading = true
+      let addProduct = {}
+      vm.cart.products.forEach(e => {
+        addProduct = {
+          product_id: e.id,
+          qty: e.num
+        }
+        vm.$http.post(api, { data: addProduct }).then(res => {})
+      })
+      vm.$router.push('/customer_Form')
+    },
+    cleanCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
 
       vm.$http.get(api).then(res => {
-        if (!res.data.data.carts[0]) {
-          vm.cartIn = false
-        } else {
-          count = res.data.data.carts
-            .map(item => item.qty)
-            .reduce((total, e) => {
-              return total + e
-            }, 0)
-        }
-
-        vm.$bus.$emit('carts:Update', count)
-
-        vm.carts = res.data.data
-        vm.carts.carts.sort(function (a, b) {
-          return a.product.title.localeCompare(b.product.title)
-        })
-        vm.isLoading = false
-      })
-    },
-    changeCart (productID, qty, itemID) {
-      this.isLoading = true
-      this.removeCartItem(itemID)
-      setTimeout(() => {
-        this.addToCart(productID, qty)
-      }, 300)
-    },
-    addToCart (id, qty = 1) {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const cart = {
-        product_id: id,
-        qty
-      }
-      vm.$http.post(api, { data: cart }).then(res => {
-        vm.getCart()
-      })
-    },
-    removeCartItem (itemId) {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId}`
-      vm.isLoading = true
-      vm.$http.delete(api).then(res => {
-        vm.getCart()
-        setTimeout(() => {
-          vm.isLoading = false
-        }, 300)
-      })
-    },
-    addCouponCode () {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
-      const coupon = {
-        code: vm.coupon_code
-      }
-      vm.$http.post(api, { data: coupon }).then(res => {
-        if (res.data.success) {
-          vm.coupon_code = `已使用優惠券${vm.coupon_code}`
-          vm.couponClass = 'is-valid'
-          vm.getCart()
-        } else {
-          vm.$bus.$emit('message:push', res.data.message)
-          vm.couponClass = 'is-invalid'
+        if (res.data.data.carts.length > 0) {
+          const carts = res.data.data.carts
+          carts.forEach(e => {
+            const delapi = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${e.id}`
+            vm.$http.delete(delapi).then(res => {})
+          })
         }
       })
     }
@@ -242,7 +193,7 @@ export default {
     ShoppingStep
   },
   created () {
-    this.getCart()
+    this.cleanCart()
   }
 }
 </script>

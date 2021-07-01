@@ -53,13 +53,9 @@ export default {
   },
   created () {
     const vm = this
-    // 自定義名稱 'messsage:push'
-    // message: 傳入參數
-    // status: 樣式，預設值為 danger
     vm.$bus.$on('message:push', (message, status = 'danger') => {
       vm.updateMessage(message, status)
     })
-    // vm.$bus.$emit("message:push"); //內部使用
   }
 }
 </script>

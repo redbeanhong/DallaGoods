@@ -1,6 +1,7 @@
 <template>
-  <div class="form-area">
-    <form class="form-signin" @submit.prevent="signin">
+  <div class="login">
+    <AlertMessage></AlertMessage>
+    <form class="login__singin" @submit.prevent="signin">
       <h1 class="h3 mb-3 font-weight-normal">管理員登入</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input
@@ -36,40 +37,49 @@
 </template>
 
 <script>
+import AlertMessage from '@/components/AlertMessage.vue'
+
 export default {
   data () {
     return {
       user: {
-        username: '',
+        username:
+          JSON.parse(localStorage.getItem('personalUserName')).userName || '',
         password: ''
       },
-      remember: false
+      remember:
+        JSON.parse(localStorage.getItem('personalUserName')).remember || false
     }
+  },
+  components: {
+    AlertMessage
   },
   methods: {
     signin () {
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       const personalUserName = {
         userName: vm.user.username,
         remember: vm.remember
       }
 
-      if (!vm.remember) {
-        localStorage.setItem('personalUserName', JSON.stringify({}))
-      } else if (vm.user.username || vm.remember) {
-        localStorage.setItem(
-          'personalUserName',
-          JSON.stringify(personalUserName)
-        )
-      }
-
       vm.$http.post(api, vm.user).then(res => {
         if (res.data.success) {
+          if (!vm.remember) {
+            localStorage.setItem('personalUserName', JSON.stringify({}))
+          } else {
+            localStorage.setItem(
+              'personalUserName',
+              JSON.stringify(personalUserName)
+            )
+          }
           const token = res.data.token
           const expired = res.data.expired
           document.cookie = `hexToken=${token}; expires=${new Date(expired)};`
           vm.$router.push('/admin')
+        } else {
+          vm.$bus.$emit('message:push', res.data.message)
+          vm.$bus.$emit('message:push', res.data.error.message)
         }
       })
     },
@@ -106,40 +116,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-area {
+.login {
   min-height: 100vh;
   display: flex;
   align-content: center;
   justify-content: center;
 
-  .form-signin {
+  .login__singin {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto;
-  }
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type='email'] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  .form-signin input[type='password'] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+
+    & .checkbox {
+      font-weight: 400;
+    }
+    & .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
+    & .form-control:focus {
+      z-index: 2;
+    }
+    & input[type='email'] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    & input[type='password'] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
 }
 </style>

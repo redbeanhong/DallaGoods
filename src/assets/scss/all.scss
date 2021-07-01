@@ -2,5 +2,7 @@
 @import './helpers/variables';
 @import '~bootstrap/scss/bootstrap';
 
-@import './helpers/_navbar'; //自定義的navbar樣式
-@import './helpers/_img'; //自定義的img樣式
+// 自訂義
+@import './helpers/_navbar';
+@import './helpers/_img';
+@import './helpers/_icon';

@@ -23,20 +23,6 @@ import {
 import * as rules from 'vee-validate/dist/rules'
 import { messages } from 'vee-validate/dist/locale/zh_TW.json'
 
-Vue.use(VueAxios, axios)
-axios.defaults.withCredentials = true
-
-Vue.component('Loading', Loading)
-Vue.filter('Currency', Currency)
-Vue.filter('TimeChange', TimeChange)
-
-Vue.config.productionTip = false
-
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
-
 Object.keys(rules).forEach(rule => {
   extend(rule, {
     ...rules[rule], // copies rule configuration
@@ -55,6 +41,21 @@ configure({
     invalid: 'is-invalid'
   }
 })
+
+Vue.use(VueAxios, axios)
+axios.defaults.withCredentials = true
+
+Vue.component('Loading', Loading)
+Vue.filter('Currency', Currency)
+Vue.filter('TimeChange', TimeChange)
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+
 // ----------------------------------------------------
 
 router.beforeEach((to, from, next) => {

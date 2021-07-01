@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
 
     <!-- TABLE -->
     <table class="table mt-4">
@@ -51,9 +49,9 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
-      orders: [], // 呈現在頁面的所有商品清單
+      orders: [],
       isNew: true, // 是否為新增商品
-      isLoading: false, // 讀取中的效果控制
+      isLoading: false,
       fullPage: true,
       pagination: {} // 多頁清單控制
     }

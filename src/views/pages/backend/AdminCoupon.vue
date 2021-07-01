@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- LOADING -->
+    
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
+    
 
     <!-- ADD PRODUCT BTN -->
     <div class="text-right">
@@ -76,7 +76,7 @@
     >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
-          <validation-observer v-slot="{ invalid }">
+          <ValidationObserver v-slot="{ invalid }">
             <form>
               <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -95,7 +95,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <!-- 標題 -->
-                    <validation-provider
+                    <ValidationProvide
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -111,12 +111,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></validation-provider
+                      </div></ValidationProvide
                     >
                     <!-- END OF 標題 -->
 
                     <!-- 優惠碼 -->
-                    <validation-provider
+                    <ValidationProvide
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -132,12 +132,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></validation-provider
+                      </div></ValidationProvide
                     >
                     <!-- END OF 優惠碼 -->
 
                     <!-- 到期日 -->
-                    <validation-provider
+                    <ValidationProvide
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -153,12 +153,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></validation-provider
+                      </div></ValidationProvide
                     >
                     <!-- END OF 到期日 -->
 
                     <!-- 折扣百分比 -->
-                    <validation-provider
+                    <ValidationProvide
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -174,7 +174,7 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></validation-provider
+                      </div></ValidationProvide
                     >
                     <!-- END OF 折扣百分比 -->
 
@@ -216,7 +216,7 @@
                 </button>
               </div>
             </form>
-          </validation-observer>
+          </ValidationObserver>
         </div>
       </div>
     </div>
@@ -284,7 +284,7 @@ export default {
       coupons: [], // 呈現在頁面的所有優惠券清單
       tempCoupon: {}, // 暫存新增或修改的優惠券
       isNew: true, // 是否為新增優惠券
-      isLoading: false, // 讀取中的效果控制
+      isLoading: false, 
       fullPage: true,
       status: {
         fileUploading: false

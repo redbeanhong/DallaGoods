@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex flex-wrap" style="min-height:100vh;">
     <div class="container">
       <CustomerNavbar></CustomerNavbar>
     </div>
@@ -14,11 +14,11 @@
       <Infobar></Infobar>
     </div>
 
-    <main role="main">
-      <div class="container">
+    <div class="container">
+      <main role="main">
         <router-view></router-view>
-      </div>
-    </main>
+      </main>
+    </div>
 
     <div class="container">
       <FooterSample></FooterSample>

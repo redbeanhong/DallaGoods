@@ -1,14 +1,16 @@
 <template>
   <div>
-    <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
 
     <!-- CARD -->
     <div class="row mt-4">
       <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
-        <div class="card border-0 shadow-sm">
-          <a href="#" @click.prevent="getProduct(item.id)">
+        <div class="card border-0 shadow-sm card--hover">
+          <a
+            href="#"
+            @click.prevent="getProduct(item.id)"
+            class="text-decoration-none"
+          >
             <div
               class="mask-toggle img img-mid"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -27,24 +29,21 @@
                 ><i class="fas fa-heart"></i
               ></a>
             </div>
+            <div class="card-body">
+              <blockquote class="blockquote text-left mb-0">
+                <p class="mb-0 text-truncate">
+                  {{ item.title }}
+                </p>
+
+                <footer class="blockquote-footer mb-0 text-right">
+                  <cite title="Source Title">{{ item.category }}</cite>
+                </footer>
+              </blockquote>
+              <div class="h5 text-right mt-2">
+                NT{{ item.price | Currency }}
+              </div>
+            </div>
           </a>
-
-          <div class="card-body">
-            <blockquote class="blockquote text-left mb-0">
-              <p class="mb-0 text-truncate">
-                {{ item.title
-                }}<i
-                  class="fas fa-spinner fa-spin"
-                  v-if="status.loadingItem === item.id"
-                ></i>
-              </p>
-
-              <footer class="blockquote-footer mb-0 text-right">
-                <cite title="Source Title">{{ item.category }}</cite>
-              </footer>
-            </blockquote>
-            <div class="h5 text-right mt-2">NT{{ item.price | Currency }}</div>
-          </div>
         </div>
       </div>
     </div>
@@ -66,19 +65,13 @@ export default {
   data () {
     return {
       allProducts: [],
-      products: [], // 呈現在頁面的所有商品清單
-      isLoading: false, // 讀取中的效果控制
-      fullPage: true, // 讀取中的效果全畫面
-      status: {
-        // 讀取中的物件
-        loadingItem: '',
-        fileUploading: ''
-      },
-      pagination: {}, // 分頁控制
+      products: [],
+      isLoading: false,
+      fullPage: true,
+      pagination: {},
       stared: JSON.parse(localStorage.getItem('personalProduct')) || [],
-      productType: '', // 頁面商品種類
+      productType: '',
       productList: {
-        // 所有商品種類
         all: 'all',
         key_ring: '包與鑰的事',
         earring: '耳朵上的事',
@@ -137,13 +130,10 @@ export default {
       }
 
       if (!vm.stared.includes(id)) {
-        // 如果此商品尚未在關注清單，就push商品名稱進入清單
         vm.stared.push(id)
-        // 並傳入通知訊息
         vm.$bus.$emit('message:dropdown', msg)
         vm.$bus.$emit('message:push', msg.title, 'success')
       } else {
-        // 如果此商品已經在關注清單，就將他從清單移除
         vm.stared.splice(
           vm.stared.findIndex(e => e === id),
           1
@@ -178,38 +168,45 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.mask-toggle {
-  position: relative;
+<style lang="scss" scoped>
+.card--hover {
   &:hover {
+    background-color: #fff1ef;
+    .mask-toggle {
+      .mask {
+        display: flex;
+      }
+
+      .heart-regular {
+        display: block;
+      }
+    }
+  }
+
+  .mask-toggle {
+    position: relative;
+
     .mask {
-      display: flex;
+      background-color: rgba(233, 233, 233, 0.2);
+      display: none;
+    }
+    .heart {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      padding: 0;
+      margin: 0;
+      display: none;
     }
 
-    .heart-regular {
+    .heart.active {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      padding: 0;
+      margin: 0;
       display: block;
     }
-  }
-  .mask {
-    background-color: rgba(233, 233, 233, 0.2);
-    display: none;
-  }
-  .heart {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    padding: 0;
-    margin: 0;
-    display: none;
-  }
-
-  .heart.active {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    padding: 0;
-    margin: 0;
-    display: block;
   }
 }
 </style>

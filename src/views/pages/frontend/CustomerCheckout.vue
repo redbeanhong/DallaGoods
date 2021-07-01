@@ -3,7 +3,7 @@
     <div class="container">
       <ShoppingStep class="mb-4"></ShoppingStep>
       <div class="my-5 row justify-content-center">
-        <form class="col-md-6" @submit.prevent="payOrder">
+        <div class="col-md-6">
           <table class="table">
             <thead>
               <th>品名</th>
@@ -54,9 +54,11 @@
             </tbody>
           </table>
           <div class="text-right">
-            <button class="btn btn-danger" type="button">確認付款去</button>
+            <button class="btn btn-danger" type="button" @click="payOrder">
+              確認付款去
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -73,7 +75,6 @@ export default {
     }
   },
   methods: {
-    // 取得所有商品，並加入到頁面的商品清單
     getOrder () {
       const vm = this
       const orderId = vm.$route.params.orderId

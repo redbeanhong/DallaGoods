@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!-- LOADING -->
-    <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
-
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-10 border rounded p-5">
@@ -12,8 +8,8 @@
             <li>若對商品有疑問，請在購買前向本公司提出。</li>
             <li>購買前詳盡地溝通，可省下退款/換貨所耗費的心力、金錢與時間。</li>
             <li>
-              退款申請須於收到商品後隔日起算 7
-              日內提出，若申請逾時或不符合退貨政策條件範圍，本公司有權拒絕退貨，請在提交申請前與本公司溝通。
+              退款申請須於收到商品後隔日起算
+              7日內提出，若申請逾時或不符合退貨政策條件範圍，本公司有權拒絕退貨，請在提交申請前與本公司溝通。
             </li>
           </ul>
           <h3 class="border-bottom pb-2 mt-5">退款流程</h3>
@@ -32,14 +28,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-      isLoading: false, // 讀取中的效果控制
-      fullPage: true
-    }
-  }
-}
-</script>

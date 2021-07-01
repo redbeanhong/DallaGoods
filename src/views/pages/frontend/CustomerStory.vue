@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- LOADING -->
-    <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-4">
@@ -29,28 +26,14 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div
-            class="h-100 imageStory1"
-            style="min-height: 250px; background-size: cover; background-position: center;"
-          ></div>
+          <div class="h-100 imageStory1 img img-mid"></div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      isLoading: false, // 讀取中的效果控制
-      fullPage: true
-    }
-  }
-}
-</script>
-
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .imageStory1 {
   background-image: url('../../../assets/img/story1.jpeg');
 }

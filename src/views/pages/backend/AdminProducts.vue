@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
 
     <!-- ADD PRODUCT BTN -->
     <div class="text-right">
@@ -78,7 +76,7 @@
     >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
-          <validation-observer v-slot="{ invalid }">
+          <ValidationObserver v-slot="{ invalid }">
             <form>
               <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -99,7 +97,7 @@
                   <!-- 表單左邊圖片區 -->
                   <div class="col-sm-4">
                     <!-- 圖片網址 -->
-                    <validation-provider
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -116,7 +114,7 @@
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
-                    </validation-provider>
+                    </ValidationProvider>
                     <!-- END OF 圖片網址 -->
 
                     <!-- 上傳圖片 -->
@@ -149,7 +147,7 @@
 
                   <!-- 表單右邊 -->
                   <div class="col-sm-8">
-                    <validation-provider
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -166,10 +164,10 @@
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
-                    </validation-provider>
+                    </ValidationProvider>
 
                     <div class="form-row">
-                      <validation-provider
+                      <ValidationProvider
                         class=" col-md-6"
                         rules="required"
                         v-slot="{ errors, classes }"
@@ -195,9 +193,9 @@
                           </select>
                           <span class="text-danger">{{ errors[0] }}</span>
                         </div>
-                      </validation-provider>
+                      </ValidationProvider>
 
-                      <validation-provider
+                      <ValidationProvider
                         rules="required"
                         class="col-md-6"
                         v-slot="{ errors, classes }"
@@ -215,11 +213,11 @@
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
                         </div>
-                      </validation-provider>
+                      </ValidationProvider>
                     </div>
 
                     <div class="form-row">
-                      <validation-provider
+                      <ValidationProvider
                         rules="required|integer"
                         class="col-md-6"
                         v-slot="{ errors, classes }"
@@ -237,9 +235,9 @@
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
                         </div>
-                      </validation-provider>
+                      </ValidationProvider>
 
-                      <validation-provider
+                      <ValidationProvider
                         rules="required|integer"
                         class="col-md-6"
                         v-slot="{ errors, classes }"
@@ -257,12 +255,12 @@
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
                         </div>
-                      </validation-provider>
+                      </ValidationProvider>
                     </div>
 
                     <hr />
 
-                    <validation-provider
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -279,9 +277,9 @@
                         ></textarea>
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
-                    </validation-provider>
+                    </ValidationProvider>
 
-                    <validation-provider
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -298,7 +296,7 @@
                         ></textarea>
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
-                    </validation-provider>
+                    </ValidationProvider>
 
                     <div class="form-group">
                       <div class="form-check">
@@ -329,7 +327,7 @@
                   取消
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   class="btn btn-primary"
                   @click="updateProduct"
                   :disabled="invalid"
@@ -338,7 +336,7 @@
                 </button>
               </div>
             </form>
-          </validation-observer>
+          </ValidationObserver>
         </div>
       </div>
     </div>
@@ -403,10 +401,10 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
-      products: [], // 呈現在頁面的所有商品清單
+      products: [],
       tempProduct: {}, // 暫存新增或修改的商品
       isNew: true, // 是否為新增商品
-      isLoading: false, // 讀取中的效果控制
+      isLoading: false,
       fullPage: true,
       status: {
         fileUploading: false
@@ -423,12 +421,13 @@ export default {
       $(`#${modalName}`).modal('show')
       if (isNew) {
         // 如果是新增商品，就給空物件
-        this.tempProduct = { category: '' }
+        this.tempProduct = { category: '', num: 1 }
         this.isNew = true
       } else {
         // 如果是修改商品，就傳入被選取的物件內容
         this.tempProduct = { ...item }
         this.isNew = false
+        this.tempProduct.num = 1
       }
     },
     closeModal (modalName) {

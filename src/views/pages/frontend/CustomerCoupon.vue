@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- LOADING -->
-    <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,10 +59,7 @@ export default {
           due_date: '2021-12-31',
           code: 'blood0511'
         }
-      ], // 呈現在頁面的所有優惠券清單
-      isNew: true, // 是否為新增優惠券
-      isLoading: false, // 讀取中的效果控制
-      fullPage: true
+      ]
     }
   },
   methods: {
@@ -105,13 +99,14 @@ export default {
   background-position: 0 0, 200px 0;
   background-repeat-x: no-repeat;
   color: var(--light);
-}
-.coupon::before {
-  position: absolute;
-  content: '';
-  left: 240px;
-  top: 0;
-  bottom: 0;
-  width: 0;
+
+  &::before {
+    position: absolute;
+    content: '';
+    left: 240px;
+    top: 0;
+    bottom: 0;
+    width: 0;
+  }
 }
 </style>

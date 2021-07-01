@@ -1,21 +1,94 @@
 <template>
   <div>
-    <!-- LOADING -->
     <loading :active.sync="isLoading"></loading>
-    <!-- END OF LOADING -->
 
-    <!-- FORM -->
-    <validation-observer v-slot="{ invalid }">
+    <ValidationObserver v-slot="{ invalid }">
       <div class="container">
         <ShoppingStep class="mb-4"></ShoppingStep>
+
+        <!-- TABLE -->
+        <div class="my-5 row justify-content-center">
+          <div class="col-md-6">
+            <table class="table">
+              <thead>
+                <th>品名</th>
+                <th>數量</th>
+                <th class="text-right">單價</th>
+              </thead>
+              <tbody>
+                <tr v-for="item in carts.carts" :key="item.id">
+                  <td class="align-middle">{{ item.product.title }}</td>
+                  <td class="align-middle">
+                    {{ item.qty }}/{{ item.product.unit }}
+                  </td>
+                  <td class="align-middle text-right">
+                    <s
+                      class="text-danger"
+                      v-if="item.final_total !== item.total"
+                      >{{ item.total | Currency }}</s
+                    >
+                    {{ item.final_total | Currency }}
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2" class="text-right">總計</td>
+                  <td class="text-right">
+                    {{ carts.total | Currency }}
+                    <small
+                      v-if="carts.final_total !== carts.total"
+                      class="text-danger"
+                      >-{{ carts.total - carts.final_total }}</small
+                    >
+                  </td>
+                </tr>
+                <tr
+                  v-if="carts.final_total !== carts.total"
+                  class="text-success"
+                >
+                  <td colspan="2" class="text-right">折扣價</td>
+                  <td class="text-right">{{ carts.final_total | Currency }}</td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="請輸入優惠碼"
+                aria-label="輸入優惠碼"
+                aria-describedby="button-addon2"
+                v-model="coupon_code"
+                :class="couponClass"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="button-addon2"
+                  @click="addCouponCode"
+                >
+                  使用優惠券
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END OF TABLE -->
+
+        <!-- FORM -->
         <div class="my-5 row justify-content-center">
           <form class="col-md-6" @submit.prevent="submitForm">
-            <validation-provider
+            <p class="text-danger text-right">標示 * 的項目請務必填入</p>
+            <ValidationProvider
               rules="required|email"
               v-slot="{ errors, classes }"
             >
               <div class="form-group">
-                <label for="useremail">Email</label>
+                <label for="useremail"
+                  ><small class="text-danger h6">*</small> Email</label
+                >
                 <input
                   type="email"
                   class="form-control"
@@ -27,11 +100,13 @@
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </div>
-            </validation-provider>
+            </ValidationProvider>
 
-            <validation-provider rules="required" v-slot="{ errors, classes }">
+            <ValidationProvider rules="required" v-slot="{ errors, classes }">
               <div class="form-group">
-                <label for="username">收件人姓名</label>
+                <label for="username"
+                  ><small class="text-danger h6">*</small> 收件人姓名</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -43,11 +118,13 @@
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </div>
-            </validation-provider>
+            </ValidationProvider>
 
-            <validation-provider rules="required" v-slot="{ errors, classes }">
+            <ValidationProvider rules="required" v-slot="{ errors, classes }">
               <div class="form-group">
-                <label for="usertel">收件人電話</label>
+                <label for="usertel"
+                  ><small class="text-danger h6">*</small> 收件人電話</label
+                >
                 <input
                   name="收件人電話"
                   type="tel"
@@ -59,11 +136,13 @@
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </div>
-            </validation-provider>
+            </ValidationProvider>
 
-            <validation-provider rules="required" v-slot="{ errors, classes }">
+            <ValidationProvider rules="required" v-slot="{ errors, classes }">
               <div class="form-group">
-                <label for="useraddress">收件人地址</label>
+                <label for="useraddress"
+                  ><small class="text-danger h6">*</small> 收件人地址</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -75,7 +154,7 @@
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </div>
-            </validation-provider>
+            </ValidationProvider>
             <div class="form-group">
               <label for="comment">留言</label>
               <textarea
@@ -88,15 +167,20 @@
               ></textarea>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-danger" :disabled="invalid">
+              <button
+                type="submit"
+                class="btn btn-danger"
+                :disabled="invalid"
+                :class="{ 'input--disabled': invalid }"
+              >
                 送出表單
               </button>
             </div>
           </form>
         </div>
+        <!-- END OF FORM -->
       </div>
-    </validation-observer>
-    <!-- END OF FORM -->
+    </ValidationObserver>
   </div>
 </template>
 
@@ -106,10 +190,8 @@ import ShoppingStep from '@/components/ShoppingStep.vue'
 export default {
   data () {
     return {
-      products: [], // 呈現在頁面的所有商品清單
-      product: {}, // 單一商品細節暫存
       carts: {}, // 購物車內容
-      isLoading: false, // 讀取中的效果控制
+      isLoading: false,
       fullPage: true,
       form: {
         user: {
@@ -120,7 +202,8 @@ export default {
         },
         message: ''
       },
-      value: ''
+      coupon_code: '',
+      couponClass: ''
     }
   },
   components: {
@@ -132,6 +215,25 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.$http.get(api).then(res => {
         vm.carts = res.data.data
+      })
+    },
+    addCouponCode () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const coupon = {
+        code: vm.coupon_code
+      }
+      vm.isLoading = true
+      vm.$http.post(api, { data: coupon }).then(res => {
+        if (res.data.success) {
+          vm.coupon_code = `已使用優惠券${vm.coupon_code}`
+          vm.couponClass = 'is-valid'
+          vm.getCart()
+        } else {
+          vm.$bus.$emit('message:push', res.data.message)
+          vm.couponClass = 'is-invalid'
+        }
+        vm.isLoading = false
       })
     },
     submitForm () {
