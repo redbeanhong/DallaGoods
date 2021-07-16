@@ -123,7 +123,9 @@ export default {
     return {
       isLoading: false,
       fullPage: true,
-      cart: JSON.parse(localStorage.getItem('personalCart')) ||  { products: [] },
+      cart: JSON.parse(localStorage.getItem('personalCart')) || {
+        products: []
+      },
       status: {
         loadingItem: ''
       }

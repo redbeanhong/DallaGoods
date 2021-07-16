@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import CustomerNavbar from '@/components/CustomerNavbar'
-import Infobar from '@/components/Infobar'
-import Banner from '@/components/Banner'
-import AlertMessage from '@/components/AlertMessage'
+import CustomerNavbar from '@/components/CustomerNavbar.vue'
+import Infobar from '@/components/Infobar.vue'
+import Banner from '@/components/Banner.vue'
+import AlertMessage from '@/components/AlertMessage.vue'
 import FooterSample from '@/components/FooterSample.vue'
 
 export default {

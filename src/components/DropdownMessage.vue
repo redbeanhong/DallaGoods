@@ -26,7 +26,7 @@
               type="button"
               class="close"
               aria-label="Close"
-              @click="deleteMsg($event, index)"
+              @click.stop="deleteMsg(index)"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -40,7 +40,7 @@
       <button
         type="button"
         class="btn btn-primary btn-block"
-        @click="deleteMsg($event, 'all')"
+        @click.stop="deleteMsg('all')"
         :disabled="msg.length < 1"
       >
         清除所有通知
@@ -68,8 +68,7 @@ export default {
     msgOpen: { type: Boolean, default: false }
   },
   methods: {
-    deleteMsg (e, index) {
-      e.stopPropagation()
+    deleteMsg (index) {
       const vm = this
       if (index === 'all') {
         vm.msg = []
@@ -91,9 +90,7 @@ export default {
   },
   created () {
     const vm = this
-    vm.$bus.$on('message:dropdown', message => {
-      vm.updateMessage(message)
-    })
+    vm.$bus.$on('message:dropdown', message => vm.updateMessage(message))
     vm.updateIconCount()
   }
 }

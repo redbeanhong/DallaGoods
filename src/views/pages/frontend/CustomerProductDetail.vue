@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    
+
     <div class="container">
       <div class="row mb-5">
         <div class="col-md-6">
@@ -332,7 +332,7 @@
 export default {
   data () {
     return {
-      product: {}, 
+      product: {},
       cart: JSON.parse(localStorage.getItem('personalCart')) || {
         products: []
       },
@@ -408,7 +408,7 @@ export default {
           1
         )
       }
-      
+
       localStorage.setItem('personalProduct', JSON.stringify(vm.stared))
     },
     getRecommend () {
@@ -416,15 +416,12 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
 
       vm.$http.get(api).then(res => {
-        const allProducts = res.data.products.filter(e => {
-          return e.is_enabled === 1
-        })
+        const allProducts = res.data.products.filter(e => e.is_enabled === 1)
 
-        vm.recommend = allProducts.filter(e => {
-          return (
+        vm.recommend = allProducts.filter(
+          e =>
             e.category === vm.product.category && e.title !== vm.product.title
-          )
-        })
+        )
         if (vm.recommend.length > 3) {
           vm.recommend.splice(3)
         }
@@ -437,7 +434,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .collapse {

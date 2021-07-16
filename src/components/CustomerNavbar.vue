@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import DropdownMessage from './DropdownMessage'
+import DropdownMessage from './DropdownMessage.vue'
 
 export default {
   data () {
@@ -170,9 +170,7 @@ export default {
   },
   created () {
     const vm = this
-    vm.$bus.$on('carts:Update', () => {
-      vm.getCart()
-    })
+    vm.$bus.$on('carts:Update', () => vm.getCart())
     vm.getCart()
   }
 }

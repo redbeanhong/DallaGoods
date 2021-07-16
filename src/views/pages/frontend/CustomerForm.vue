@@ -213,9 +213,7 @@ export default {
     getCart () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.$http.get(api).then(res => {
-        vm.carts = res.data.data
-      })
+      vm.$http.get(api).then(res => (vm.carts = res.data.data))
     },
     addCouponCode () {
       const vm = this

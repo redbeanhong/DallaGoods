@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/DallaGoods/',
+  publicPath: './',
   pwa: {
     iconPaths: {
       favicon32: './public/favicon.ico',

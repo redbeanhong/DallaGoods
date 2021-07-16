@@ -97,7 +97,7 @@ export default {
     );
   background-size: 200px 18px;
   background-position: 0 0, 200px 0;
-  background-repeat-x: no-repeat;
+  background-repeat: no-repeat;
   color: var(--light);
 
   &::before {

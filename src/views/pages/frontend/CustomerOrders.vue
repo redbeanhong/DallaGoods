@@ -29,14 +29,14 @@
               <div class="mask h-100"></div>
               <a
                 class="heart heart-regular h3 text-danger"
-                @click.prevent="changeStared($event, item.id, item.title)"
+                @click.prevent.stop="changeStared(item.id, item.title)"
                 v-if="!stared.includes(item.id)"
                 ><i class="far fa-heart"></i
               ></a>
               <a
                 class="heart h3 text-danger"
                 :class="{ active: stared.includes(item.id) }"
-                @click.prevent="changeStared($event, item.id)"
+                @click.prevent.stop="changeStared(item.id)"
                 ><i class="fas fa-heart"></i
               ></a>
             </div>
@@ -106,9 +106,7 @@ export default {
 
       vm.isLoading = true
       vm.$http.get(api).then(res => {
-        vm.allProducts = res.data.products.filter(e => {
-          return e.is_enabled === 1
-        })
+        vm.allProducts = res.data.products.filter(e => e.is_enabled === 1)
 
         const staredArea = document.querySelector('#stared__none')
         staredArea.classList.remove('active')
@@ -122,14 +120,12 @@ export default {
           })
           vm.pagination = {}
         } else if (vm.productType === 'stared') {
-          if (vm.stared.length===0 || vm.stared === null) {
+          if (vm.stared.length === 0 || vm.stared === null) {
             staredArea.classList.add('active')
           } else {
             staredArea.classList.remove('active')
           }
-          vm.products = vm.allProducts.filter(e => {
-            return vm.stared.includes(e.id)
-          })
+          vm.products = vm.allProducts.filter(e => vm.stared.includes(e.id))
           vm.pagination = {}
         }
         vm.isLoading = false
@@ -138,8 +134,7 @@ export default {
     getProduct (id) {
       this.$router.push({ path: `/product_detail/${id}` })
     },
-    changeStared (e, id, title) {
-      e.stopPropagation()
+    changeStared (id, title) {
       const vm = this
       const msg = {
         title: `『${title}』已加入關注清單`,

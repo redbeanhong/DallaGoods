@@ -7,7 +7,7 @@ import VueAxios from 'vue-axios'
 
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-import bootstrap from 'bootstrap' // eslint-disable-line
+import 'bootstrap'
 
 import './bus'
 import Currency from './filters/Currency'
