@@ -1,4 +1,4 @@
-export default function (time) {
+export default time => {
   let NewTime = new Date(time)
   if (time.length < 13) {
     NewTime = new Date(time * 1000)

@@ -1,4 +1,4 @@
-export default function (num) {
+export default num => {
   const n = Number(num)
   return `$${n.toFixed(0).replace(/./g, (c, i, a) => {
     const currency =

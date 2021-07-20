@@ -374,7 +374,7 @@ export default {
       vm.updateTotal()
       localStorage.setItem('personalCart', JSON.stringify(vm.cart))
 
-      setTimeout(function () {
+      setTimeout(() => {
         vm.status.loadingItem = false
       }, 500)
 

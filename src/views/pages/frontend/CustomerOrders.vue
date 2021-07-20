@@ -36,7 +36,7 @@
               <a
                 class="heart h3 text-danger"
                 :class="{ active: stared.includes(item.id) }"
-                @click.prevent.stop="changeStared(item.id)"
+                @click.prevent.stop="changeStared(item.id, item.title)"
                 ><i class="fas fa-heart"></i
               ></a>
             </div>
@@ -145,14 +145,16 @@ export default {
 
       if (!vm.stared.includes(id)) {
         vm.stared.push(id)
-        vm.$bus.$emit('message:dropdown', msg)
-        vm.$bus.$emit('message:push', msg.title, 'success')
       } else {
         vm.stared.splice(
           vm.stared.findIndex(e => e === id),
           1
         )
+        msg.title = `『${title}』已從關注清單移除`
+        msg.content = '本店有眾多商品歡迎繼續選購'
       }
+      vm.$bus.$emit('message:dropdown', msg)
+      vm.$bus.$emit('message:push', msg.title, 'success')
 
       // 將關注資料存到localStorage
       localStorage.setItem('personalProduct', JSON.stringify(vm.stared))

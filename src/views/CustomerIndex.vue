@@ -1,14 +1,10 @@
 <template>
   <div class="d-flex flex-wrap" style="min-height:100vh;">
-    <div class="container">
-      <CustomerNavbar></CustomerNavbar>
-    </div>
+    <CustomerNavbar class="w-100 position-fixed top-0" style="z-index: 99;"></CustomerNavbar>
 
     <AlertMessage></AlertMessage>
 
-    <div class="container">
-      <Banner></Banner>
-    </div>
+    <Banner class="pt-5"></Banner>
 
     <div class="container">
       <Infobar></Infobar>
@@ -16,13 +12,11 @@
 
     <div class="container">
       <main role="main">
-        <router-view></router-view>
+        <router-view @closeBanner="closeBanner"></router-view>
       </main>
     </div>
 
-    <div class="container">
-      <FooterSample></FooterSample>
-    </div>
+    <FooterSample class="w-100"></FooterSample>
   </div>
 </template>
 

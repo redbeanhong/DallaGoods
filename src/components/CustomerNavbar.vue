@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-primary align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-primary align-items-center bg-white">
       <!-- LOGO -->
       <router-link class="navbar-brand order-1" to="/"
         ><img src="../assets/img/logo.jpg" width="50" height="50" alt="LOGO"
