@@ -1,29 +1,29 @@
 <template>
   <div>
-    <ul class="nav nav-tabs nav-fill my-4">
+    <ul class="nav my-4 nav--line justify-content-center flex-nowrap">
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/all"
-          >全部商品</router-link
+          >全部<span class="d-none d-sm-inline">商品</span></router-link
         >
       </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/key_ring"
-          >療癒配件</router-link
+          ><span class="d-none d-sm-inline">療癒</span>配件</router-link
         >
       </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/earring"
-          >小巧飾品</router-link
+          ><span class="d-none d-sm-inline">小巧</span>耳飾</router-link
         >
       </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/tray"
-          >居家生活</router-link
+          >居家<span class="d-none d-sm-inline">生活</span></router-link
         >
       </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/technology"
-          >創意科技</router-link
+          ><span class="d-none d-sm-inline">創意</span>科技</router-link
         >
       </li>
     </ul>

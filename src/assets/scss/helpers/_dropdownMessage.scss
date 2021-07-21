@@ -1,0 +1,29 @@
+.DropdownMessage {
+  background: var(--light);
+  width: 280px;
+  position: absolute;
+  top: 50px;
+  right: -110px;
+  z-index: 2;
+  &:after {
+    bottom: 100%;
+    right: 115px;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: var(--primary);
+    border-width: 8px;
+    margin-left: -8px;
+  }
+  @include media-breakpoint-up(sm) {
+    width: 320px;
+    right: -13px;
+
+    &:after {
+      right: 20px;
+    }
+  }
+}

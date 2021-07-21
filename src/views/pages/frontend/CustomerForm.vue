@@ -4,7 +4,7 @@
 
     <ValidationObserver v-slot="{ invalid }">
       <div class="container">
-        <ShoppingStep class="mb-4"></ShoppingStep>
+        <ShoppingStep class="mb-5"></ShoppingStep>
 
         <!-- TABLE -->
         <div class="my-5 row justify-content-center">

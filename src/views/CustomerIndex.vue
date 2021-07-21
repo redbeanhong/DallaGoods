@@ -1,18 +1,21 @@
 <template>
   <div class="d-flex flex-wrap" style="min-height:100vh;">
-    <CustomerNavbar class="w-100 position-fixed top-0" style="z-index: 99;"></CustomerNavbar>
+    <CustomerNavbar
+      class="w-100 position-fixed top-0"
+      style="z-index: 99;"
+    ></CustomerNavbar>
 
     <AlertMessage></AlertMessage>
 
     <Banner class="pt-5"></Banner>
 
-    <div class="container">
+    <div class="container-fluid border-bottom border-top mb-4">
       <Infobar></Infobar>
     </div>
 
-    <div class="container">
+    <div class="w-100">
       <main role="main">
-        <router-view @closeBanner="closeBanner"></router-view>
+        <router-view></router-view>
       </main>
     </div>
 

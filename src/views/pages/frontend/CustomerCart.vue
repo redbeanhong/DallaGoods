@@ -13,10 +13,10 @@
       </p>
     </div>
 
-    <div class="container" v-else>
-      <ShoppingStep class="mb-4"></ShoppingStep>
+    <div v-else>
+      <ShoppingStep class="mb-5"></ShoppingStep>
       <div class="row justify-content-center">
-        <div class="col-md-10 col-10">
+        <div class="col-10 col-md-8">
           <!-- 商品內容 -->
           <section
             class="row mb-4"
@@ -95,13 +95,13 @@
 
           <!-- 結帳價格 -->
           <section class="row justify-content-end">
-            <div class="col-4 text-center">
+            <div class="col-md-6 col-xl-4 text-center">
               <p class="h3 border-bottom mb-3 p-3">
                 總計: <span>NT{{ cart.total | Currency }}</span>
               </p>
               <button
                 type="button"
-                class="btn btn-primary btn-lg"
+                class="btn btn-primary btn-lg mb-3 mb-md-0"
                 @click="addToCart"
               >
                 結帳去

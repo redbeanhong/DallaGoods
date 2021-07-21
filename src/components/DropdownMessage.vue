@@ -95,27 +95,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.DropdownMessage {
-  background: var(--light);
-  width: 320px;
-  position: absolute;
-  top: 40px;
-  right: -13px;
-  z-index: 2;
-}
-.DropdownMessage:after {
-  bottom: 100%;
-  right: 20px;
-  border: solid transparent;
-  content: ' ';
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-bottom-color: var(--primary);
-  border-width: 8px;
-  margin-left: -8px;
-}
-</style>

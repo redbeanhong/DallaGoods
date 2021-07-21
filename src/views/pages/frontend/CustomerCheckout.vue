@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <ShoppingStep class="mb-4"></ShoppingStep>
+      <ShoppingStep class="mb-5"></ShoppingStep>
       <div class="my-5 row justify-content-center">
         <div class="col-md-6">
           <table class="table">
