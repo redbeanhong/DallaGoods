@@ -1,6 +1,7 @@
 .img {
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
   &.img-small {
     min-height: 150px;

@@ -51,17 +51,26 @@ export default new Router({
         {
           path: 'customer_cart',
           name: 'CustomerCart',
-          component: CustomerCart
+          component: CustomerCart,
+          meta: {
+            closeBanner: true
+          }
         },
         {
           path: 'customer_form',
           name: 'CustomerForm',
-          component: CustomerForm
+          component: CustomerForm,
+          meta: {
+            closeBanner: true
+          }
         },
         {
           path: 'customer_checkout/:orderId',
           name: 'CustomerCheckout',
-          component: CustomerCheckout
+          component: CustomerCheckout,
+          meta: {
+            closeBanner: true
+          }
         },
         {
           path: 'Customer_coupon',
@@ -86,7 +95,10 @@ export default new Router({
         {
           path: 'Customer_finished',
           name: 'CustomerFinished',
-          component: CustomerFinished
+          component: CustomerFinished,
+          meta: {
+            closeBanner: true
+          }
         }
       ]
     },

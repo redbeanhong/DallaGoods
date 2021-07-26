@@ -13,8 +13,8 @@
       </p>
     </div>
 
-    <div v-else>
-      <ShoppingStep class="mb-5"></ShoppingStep>
+    <div class="container" v-else>
+      <ShoppingStep></ShoppingStep>
       <div class="row justify-content-center">
         <div class="col-10 col-md-8">
           <!-- 商品內容 -->
@@ -47,7 +47,7 @@
                   <span aria-hidden="true" v-else>&times;</span>
                 </button>
                 <blockquote class="blockquote text-left">
-                  <p class="mb-0">
+                  <p class="mb-0 text-truncate" :title="item.title">
                     {{ item.title }}
                   </p>
                   <footer class="blockquote-footer pl-5">
@@ -174,7 +174,7 @@ export default {
         }
         vm.$http.post(api, { data: addProduct }).then(() => {})
       })
-      vm.$router.push('/customer_Form')
+      vm.$router.push('/customer_form')
     },
     cleanCart () {
       const vm = this

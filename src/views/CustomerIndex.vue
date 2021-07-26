@@ -1,15 +1,15 @@
 <template>
-  <div class="d-flex flex-wrap" style="min-height:100vh;">
-    <CustomerNavbar
-      class="w-100 position-fixed top-0"
-      style="z-index: 99;"
-    ></CustomerNavbar>
+  <div class="d-flex flex-wrap" style="min-height:100vh;padding-top:76px;">
+    <CustomerNavbar class="w-100 fixed-top"></CustomerNavbar>
 
     <AlertMessage></AlertMessage>
 
-    <Banner class="pt-5"></Banner>
+    <Banner v-if="!$route.meta.closeBanner"></Banner>
 
-    <div class="container-fluid border-bottom border-top mb-4">
+    <div
+      class="container-fluid border-bottom border-top mb-4"
+      v-if="!$route.meta.closeBanner"
+    >
       <Infobar></Infobar>
     </div>
 

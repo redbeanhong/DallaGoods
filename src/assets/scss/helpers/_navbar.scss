@@ -95,3 +95,71 @@
     }
   }
 }
+
+.nav__container {
+  padding: 20px 0;
+
+  .nav--dot {
+    position: relative;
+    height: 10px;
+    display: flex;
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav__line {
+      position: absolute;
+      width: calc(100% - 15px);
+      top: 0;
+      left: 7.5px;
+      height: 100%;
+      background-color: rgb(209, 209, 209);
+      top: 0;
+    }
+    .nav__item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      background: rgb(160, 160, 160);
+      border-radius: 50%;
+      cursor: pointer;
+      pointer-events: none;
+
+      &.active {
+        width: 25px;
+        height: 25px;
+        background-color: $navbar-primary-disabled-color;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          top: calc(50% - 7.5px);
+          left: calc(50% - 7.5px);
+          background: $primary;
+        }
+
+        .nav__link {
+          font-weight: 900;
+          font-size: 1.2rem;
+          display: block;
+        }
+      }
+    }
+    .nav__link {
+      position: relative;
+      top: -40px;
+      white-space: nowrap;
+      display: none;
+      color: $primary;
+      @include media-breakpoint-up(md) {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,35 +1,31 @@
 <template>
-  <div class="d-none d-sm-block">
-    <p class="h3 text-center mb-3">結帳流程</p>
+  <div>
+    <p class="h3 text-center mb-5">結帳流程</p>
     <div class="row justify-content-center">
-      <div class="col-md-10">
-        <ol class="nav nav-pills row align-items-center justify-content-between pe--none">
-          <li class="nav-item">
-            <router-link class="nav-link text-center" to="/customer_cart"
-              >1.確認購物車</router-link
+      <div class="nav__container col-9 col-md-6">
+        <ul class="nav--dot">
+          <li class="nav__line"></li>
+          <li>
+            <router-link class="nav__item" to="/customer_cart">
+              <span class="nav__link text-center">確認購物車</span></router-link
             >
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link text-center" to="/customer_form"
-              >2.填寫資料</router-link
+          <li>
+            <router-link class="nav__item" to="/customer_form"
+              ><span class="nav__link text-center">填寫資料</span></router-link
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-center"
-              href="#"
-              :class="{ active: customerCheckout }"
-              >3.確定付款方式</a
+          <li>
+            <a class="nav__item" href="#" :class="{ active: customerCheckout }"
+              ><span class="nav__link text-center">確定付款方式</span></a
             >
           </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link text-center last-child"
-              to="/customer_finished"
-              >4.完成訂購</router-link
+          <li>
+            <router-link class="nav__item" to="/customer_finished"
+              ><span class="nav__link text-center">完成訂購</span></router-link
             >
           </li>
-        </ol>
+        </ul>
       </div>
     </div>
   </div>

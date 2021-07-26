@@ -9,21 +9,36 @@
         <li class="carousel-item active">
           <img
             src="../assets/img/banner.jpg"
-            class="d-block w-100"
+            class="w-100 d-none d-sm-block"
+            alt="banner"
+          />
+          <img
+            src="../assets/img/banner-sm.jpg"
+            class="w-100 d-block d-sm-none"
             alt="banner"
           />
         </li>
         <li class="carousel-item">
           <img
             src="../assets/img/banner2.jpg"
-            class="d-block w-100"
+            class="w-100 d-none d-sm-block"
+            alt="banner"
+          />
+          <img
+            src="../assets/img/banner-sm2.jpg"
+            class="w-100 d-block d-sm-none"
             alt="banner"
           />
         </li>
         <li class="carousel-item">
           <img
             src="../assets/img/banner3.jpg"
-            class="d-block w-100"
+            class="w-100 d-none d-sm-block"
+            alt="banner"
+          />
+          <img
+            src="../assets/img/banner-sm3.jpg"
+            class="w-100 d-block d-sm-none"
             alt="banner"
           />
         </li>

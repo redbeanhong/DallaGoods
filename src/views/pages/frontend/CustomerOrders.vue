@@ -2,70 +2,72 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
-    <div class="container" id="stared__none">
-      <p class="h3 text-primary border border-primary rounded p-3 text-center">
-        目前關注清單暫無內容，眾多商品歡迎選購！
-        <router-link class="nav-link text-danger" to="/customer_orders/all"
-          >點我來去逛逛<i class="far fa-hand-point-left"></i
-          ><i class="far fa-hand-point-left"></i
-          ><i class="far fa-hand-point-left"></i
-        ></router-link>
-      </p>
-    </div>
+    <div class="container">
+      <div id="stared__none">
+        <p
+          class="h3 text-primary border border-primary rounded p-3 text-center"
+        >
+          目前關注清單暫無內容，眾多商品歡迎選購！
+          <router-link class="nav-link text-danger" to="/customer_orders/all"
+            >點我來去逛逛<i class="far fa-hand-point-left"></i
+            ><i class="far fa-hand-point-left"></i
+            ><i class="far fa-hand-point-left"></i
+          ></router-link>
+        </p>
+      </div>
 
-    <!-- CARD -->
-    <div class="row mt-4">
-      <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
-        <div class="card border-0 shadow-sm card--hover">
-          <a
-            href="#"
-            @click.prevent="getProduct(item.id)"
-            class="text-decoration-none"
-          >
-            <div
-              class="mask-toggle img img-mid"
-              :style="{ backgroundImage: `url(${item.imageUrl})` }"
+      <div class="row mt-4">
+        <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
+          <div class="card border-0 shadow-sm card--hover">
+            <a
+              href="#"
+              @click.prevent="getProduct(item.id)"
+              class="text-decoration-none"
             >
-              <div class="mask h-100"></div>
-              <a
-                class="heart heart-regular h3 text-danger"
-                @click.prevent.stop="changeStared(item.id, item.title)"
-                v-if="!stared.includes(item.id)"
-                ><i class="far fa-heart"></i
-              ></a>
-              <a
-                class="heart h3 text-danger"
-                :class="{ active: stared.includes(item.id) }"
-                @click.prevent.stop="changeStared(item.id, item.title)"
-                ><i class="fas fa-heart"></i
-              ></a>
-            </div>
-            <div class="card-body">
-              <blockquote class="blockquote text-left mb-0">
-                <p class="mb-0 text-truncate">
-                  {{ item.title }}
-                </p>
-
-                <footer class="blockquote-footer mb-0 text-right">
-                  <cite title="Source Title">{{ item.category }}</cite>
-                </footer>
-              </blockquote>
-              <div class="h5 text-right mt-2">
-                NT{{ item.price | Currency }}
+              <div
+                class="mask-toggle img img-mid"
+                :style="{ backgroundImage: `url(${item.imageUrl})` }"
+              >
+                <div class="mask h-100"></div>
+                <a
+                  class="heart heart-regular h3 text-danger"
+                  @click.prevent.stop="changeStared(item.id, item.title)"
+                  v-if="!stared.includes(item.id)"
+                  ><i class="far fa-heart"></i
+                ></a>
+                <a
+                  class="heart h3 text-danger"
+                  :class="{ active: stared.includes(item.id) }"
+                  @click.prevent.stop="changeStared(item.id, item.title)"
+                  ><i class="fas fa-heart"></i
+                ></a>
               </div>
-            </div>
-          </a>
+              <div class="card-body">
+                <blockquote class="blockquote text-left mb-0">
+                  <p class="mb-0 text-truncate" :title="item.title">
+                    {{ item.title }}
+                  </p>
+
+                  <footer class="blockquote-footer mb-0 text-right">
+                    <cite title="Source Title">{{ item.category }}</cite>
+                  </footer>
+                </blockquote>
+                <div class="h5 text-right mt-2">
+                  NT{{ item.price | Currency }}
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- END OF CARD -->
 
-    <!-- PAGINATION -->
-    <Pagination
-      :pagination="pagination"
-      v-on:getpagination="getProducts"
-    ></Pagination>
-    <!-- END OF PAGINATION -->
+      <!-- PAGINATION -->
+      <Pagination
+        :pagination="pagination"
+        v-on:getpagination="getProducts"
+      ></Pagination>
+      <!-- END OF PAGINATION -->
+    </div>
   </div>
 </template>
 
