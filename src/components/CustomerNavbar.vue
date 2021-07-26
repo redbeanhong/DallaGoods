@@ -30,7 +30,7 @@
       >
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav--line align-items-start">
           <li class="nav-item px-2" @click="navClose">
-            <router-link to="/customer_story" class="nav-link" href="#">
+            <router-link to="/customer_story" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="fas icon--mid fa-book-open mr-3"></i>
                 <p class="mb-0">
@@ -40,7 +40,7 @@
             </router-link>
           </li>
           <li class="nav-item px-2" @click="navClose">
-            <router-link to="/customer_comment" class="nav-link" href="#">
+            <router-link to="/customer_comment" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="fas icon--mid fa-comment-dots mr-3"></i>
                 <p class="mb-0">
@@ -50,7 +50,7 @@
             </router-link>
           </li>
           <li class="nav-item px-2" @click="navClose">
-            <router-link to="/customer_coupon" class="nav-link" href="#">
+            <router-link to="/customer_coupon" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="fas icon--mid fa-ticket-alt mr-3"></i>
                 <p class="mb-0">
@@ -60,7 +60,7 @@
             </router-link>
           </li>
           <li class="nav-item px-2" @click="navClose">
-            <router-link to="/customer_notice" class="nav-link" href="#">
+            <router-link to="/customer_notice" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="fas icon--mid fa-info-circle mr-3"></i>
                 <p class="mb-0">

@@ -1,8 +1,6 @@
 <template>
   <div>
-    
     <loading :active.sync="isLoading"></loading>
-    
 
     <!-- ADD PRODUCT BTN -->
     <div class="text-right">
@@ -77,7 +75,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
           <ValidationObserver v-slot="{ invalid }">
-            <form>
+            <form @submit.prevent="updateCoupon">
               <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="exampleModalLabel">
                   <span>建立新的優惠券</span>
@@ -95,7 +93,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <!-- 標題 -->
-                    <ValidationProvide
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -111,12 +109,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></ValidationProvide
+                      </div></ValidationProvider
                     >
                     <!-- END OF 標題 -->
 
                     <!-- 優惠碼 -->
-                    <ValidationProvide
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -132,12 +130,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></ValidationProvide
+                      </div></ValidationProvider
                     >
                     <!-- END OF 優惠碼 -->
 
                     <!-- 到期日 -->
-                    <ValidationProvide
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -153,12 +151,12 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></ValidationProvide
+                      </div></ValidationProvider
                     >
                     <!-- END OF 到期日 -->
 
                     <!-- 折扣百分比 -->
-                    <ValidationProvide
+                    <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
                     >
@@ -174,7 +172,7 @@
                           :class="classes"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
-                      </div></ValidationProvide
+                      </div></ValidationProvider
                     >
                     <!-- END OF 折扣百分比 -->
 
@@ -207,9 +205,8 @@
                   取消
                 </button>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary"
-                  @click="updateCoupon"
                   :disabled="invalid"
                 >
                   確認
@@ -284,7 +281,7 @@ export default {
       coupons: [], // 呈現在頁面的所有優惠券清單
       tempCoupon: {}, // 暫存新增或修改的優惠券
       isNew: true, // 是否為新增優惠券
-      isLoading: false, 
+      isLoading: false,
       fullPage: true,
       status: {
         fileUploading: false

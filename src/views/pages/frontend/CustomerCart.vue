@@ -172,7 +172,7 @@ export default {
           product_id: e.id,
           qty: e.num
         }
-        vm.$http.post(api, { data: addProduct }).then(res => {})
+        vm.$http.post(api, { data: addProduct }).then(() => {})
       })
       vm.$router.push('/customer_Form')
     },
@@ -185,7 +185,7 @@ export default {
           const carts = res.data.data.carts
           carts.forEach(e => {
             const delapi = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${e.id}`
-            vm.$http.delete(delapi).then(res => {})
+            vm.$http.delete(delapi).then(() => {})
           })
         }
       })
