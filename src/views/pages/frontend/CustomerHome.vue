@@ -103,8 +103,7 @@ import 'slick-carousel'
 export default {
   data () {
     return {
-      products: [],
-      isLoading: false
+      products: []
     }
   },
   methods: {
