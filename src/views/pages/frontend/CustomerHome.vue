@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container mb-3">
+    <section class="container mb-3" id="news">
       <div class="row">
         <div class="col-md-4 about2 img mb-3 mb-md-0"></div>
         <div class="col-md-8">
@@ -17,8 +17,8 @@
           </p>
         </div>
       </div>
-    </div>
-    <div class="about img py-5 mb-4">
+    </section>
+    <section class="about img py-5 mb-4" id="about">
       <div class="container">
         <h3 class="mb-5">[ Dalla 理念 ]</h3>
         <p>
@@ -31,8 +31,8 @@
           如果能透過我們得到力量，那就是我們最快樂的事情。
         </p>
       </div>
-    </div>
-    <div class="container">
+    </section>
+    <section class="container mb-4" id="service">
       <h3 class="mb-5">[ Dalla 服務 ]</h3>
       <ul class="row justify-content-between list-unstyled mb-0">
         <li class="card col-md-4 mb-3 mb-md-0 border-0">
@@ -69,9 +69,87 @@
           </div>
         </li>
       </ul>
-    </div>
+    </section>
+    <section id="products">
+      <h3 class="mb-5 text-center">[ Dalla 精選 ]</h3>
+      <ul class="slider list-unstyled">
+        <li class="slider__item" v-for="item in products" :key="item.id">
+          <div
+            class="img h-100"
+            :style="{ backgroundImage: `url(${item.imageUrl})` }"
+          >
+            <div
+              class="slider__content h-100 justify-content-center align-items-center p-3"
+            >
+              <h4 class="mb-3 text-light">{{ item.title }}</h4>
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                @click="getDetail(item.id)"
+              >
+                想了解更多
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
+<script>
+import $ from 'jquery'
+import 'slick-carousel'
+
+export default {
+  data () {
+    return {
+      products: [],
+      isLoading: false
+    }
+  },
+  methods: {
+    getProducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.$http.get(api).then(res => {
+        vm.products = res.data.products.filter(e => e.is_enabled === 1)
+      })
+    },
+    setSlider () {
+      $('.slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 576,
+            settings: {
+              slidesToShow: 2
+            }
+          }
+        ]
+      })
+    },
+    getDetail (id) {
+      this.$router.push({ path: `/product_detail/${id}` })
+    }
+  },
+  created () {
+    this.getProducts()
+  },
+  updated () {
+    this.setSlider()
+  }
+}
+</script>
 
 <style lang="scss">
 .about {
@@ -80,5 +158,19 @@
 .about2 {
   background-image: url('../../../assets/img/about2.jpg');
   min-height: 300px;
+}
+.slider__item {
+  height: 200px;
+  .slider__content {
+    background-color: rgba(88, 88, 88, 0.5);
+    display: none;
+  }
+
+  &:hover {
+    .slider__content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 </style>
