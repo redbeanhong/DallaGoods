@@ -2,7 +2,7 @@
 
 ## DEMO
 
-[https://redbeanhong.github.io/DallaGoods/#/]https://redbeanhong.github.io/DallaGoods/#/
+https://redbeanhong.github.io/DallaGoods/#/
 
 ## Libraries use in this project
 
