@@ -104,7 +104,6 @@
                           type="text"
                           class="form-control"
                           id="title"
-                          name="標題"
                           placeholder="請輸入標題"
                           :class="classes"
                         />
@@ -125,7 +124,6 @@
                           type="text"
                           class="form-control"
                           id="category"
-                          name="優惠碼"
                           placeholder="請輸入優惠碼"
                           :class="classes"
                         />
@@ -146,7 +144,6 @@
                           type="date"
                           class="form-control"
                           id="date"
-                          name="到期日"
                           placeholder="請輸入到期日"
                           :class="classes"
                         />
@@ -167,7 +164,6 @@
                           type="unit"
                           class="form-control"
                           id="unit"
-                          name="折扣百分比"
                           placeholder="請輸入折扣百分比"
                           :class="classes"
                         />

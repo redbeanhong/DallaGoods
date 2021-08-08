@@ -108,7 +108,6 @@
                           class="form-control"
                           id="image"
                           placeholder="請輸入圖片連結"
-                          name="圖片"
                           v-model="tempProduct.imageUrl"
                           :class="classes"
                         />
@@ -160,7 +159,6 @@
                           id="title"
                           placeholder="請輸入標題"
                           :class="classes"
-                          name="標題"
                         />
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
@@ -181,7 +179,6 @@
                             id="category"
                             placeholder="請輸入分類"
                             :class="classes"
-                            name="分類"
                           >
                             <option disabled value="">--請選擇--</option>
                             <option
@@ -208,7 +205,6 @@
                             class="form-control"
                             id="unit"
                             placeholder="請輸入單位"
-                            name="單位"
                             :class="classes"
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
@@ -230,7 +226,6 @@
                             class="form-control"
                             id="origin_price"
                             placeholder="請輸入原價"
-                            name="原價"
                             :class="classes"
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
@@ -250,7 +245,6 @@
                             class="form-control"
                             id="price"
                             placeholder="請輸入售價"
-                            name="售價"
                             :class="classes"
                           />
                           <span class="text-danger">{{ errors[0] }}</span>
@@ -272,7 +266,6 @@
                           class="form-control"
                           id="description"
                           placeholder="請輸入產品描述"
-                          name="產品描述"
                           :class="classes"
                         ></textarea>
                         <span class="text-danger">{{ errors[0] }}</span>
@@ -291,7 +284,6 @@
                           class="form-control"
                           id="content"
                           placeholder="請輸入產品說明內容"
-                          name="產品說明"
                           :class="classes"
                         ></textarea>
                         <span class="text-danger">{{ errors[0] }}</span>
@@ -305,7 +297,6 @@
                           type="checkbox"
                           id="is_enabled"
                           v-model="tempProduct.is_enabled"
-                          name="是否啟用"
                           :true-value="1"
                           :false-value="0"
                         />

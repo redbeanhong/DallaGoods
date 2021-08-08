@@ -27,7 +27,7 @@
               <strong>NT{{ (product.num * product.price) | Currency }}</strong>
             </span>
           </p>
-          <select name="數量" class="form-control mt-3" v-model="product.num">
+          <select class="form-control mt-3" v-model="product.num">
             <option :value="num" v-for="num in 10" :key="num">
               選購 {{ num }} {{ product.unit }}
             </option>

@@ -35,22 +35,18 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'CustomerHome',
           component: CustomerHome
         },
         {
           path: 'customer_orders/:productType',
-          name: 'CustomerOrders',
           component: CustomerOrders
         },
         {
           path: 'product_detail/:productId',
-          name: 'ProductDetail',
           component: CustomerProductDetail
         },
         {
           path: 'customer_cart',
-          name: 'CustomerCart',
           component: CustomerCart,
           meta: {
             closeBanner: true
@@ -58,7 +54,6 @@ export default new Router({
         },
         {
           path: 'customer_form',
-          name: 'CustomerForm',
           component: CustomerForm,
           meta: {
             closeBanner: true
@@ -66,7 +61,6 @@ export default new Router({
         },
         {
           path: 'customer_checkout/:orderId',
-          name: 'CustomerCheckout',
           component: CustomerCheckout,
           meta: {
             closeBanner: true
@@ -74,27 +68,22 @@ export default new Router({
         },
         {
           path: 'Customer_coupon',
-          name: 'CustomerCoupon',
           component: CustomerCoupon
         },
         {
           path: 'Customer_story',
-          name: 'CustomerStory',
           component: CustomerStory
         },
         {
           path: 'Customer_comment',
-          name: 'CustomerComment',
           component: CustomerComment
         },
         {
           path: 'Customer_notice',
-          name: 'CustomerNotice',
           component: CustomerNotice
         },
         {
           path: 'Customer_finished',
-          name: 'CustomerFinished',
           component: CustomerFinished,
           meta: {
             closeBanner: true
@@ -104,7 +93,6 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
       component: AdminLogin
     },
     {
@@ -113,7 +101,6 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'Home',
           component: AdminHome,
           meta: {
             requiresAuth: true
@@ -121,7 +108,6 @@ export default new Router({
         },
         {
           path: 'products',
-          name: 'Products',
           component: AdminProducts,
           meta: {
             requiresAuth: true
@@ -129,7 +115,6 @@ export default new Router({
         },
         {
           path: 'orderlist',
-          name: 'OrderList',
           component: AdminOrderList,
           meta: {
             requiresAuth: true
@@ -137,7 +122,6 @@ export default new Router({
         },
         {
           path: 'coupon',
-          name: 'Coupon',
           component: AdminCoupon,
           meta: {
             requiresAuth: true

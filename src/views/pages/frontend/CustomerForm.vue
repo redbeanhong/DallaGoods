@@ -92,7 +92,6 @@
                 <input
                   type="email"
                   class="form-control"
-                  name="Email"
                   id="useremail"
                   v-model="form.user.email"
                   placeholder="請輸入 Email"
@@ -110,7 +109,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  name="姓名"
                   id="username"
                   v-model="form.user.name"
                   placeholder="輸入姓名"
@@ -126,7 +124,6 @@
                   ><small class="text-danger h6">*</small> 收件人電話</label
                 >
                 <input
-                  name="收件人電話"
                   type="tel"
                   class="form-control"
                   id="usertel"
@@ -146,7 +143,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  name="收件人地址"
                   id="useraddress"
                   v-model="form.user.address"
                   placeholder="請輸入地址"
@@ -158,7 +154,6 @@
             <div class="form-group">
               <label for="comment">留言</label>
               <textarea
-                name="留言"
                 id="comment"
                 class="form-control"
                 cols="30"
