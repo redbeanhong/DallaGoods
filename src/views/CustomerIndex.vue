@@ -8,7 +8,7 @@
 
     <div
       class="container-fluid border-bottom border-top mb-4"
-      v-if="!$route.meta.closeBanner"
+      v-show="!$route.meta.closeBanner"
     >
       <Infobar></Infobar>
     </div>

@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
-    <div class="container" v-if="cart.products.length === 0">
+    <div class="container pt-5" v-if="cart.products.length === 0">
       <p class="h3 text-primary border border-primary rounded p-3 text-center">
         目前購物車內暫無內容，眾多商品歡迎選購！
         <router-link class="nav-link text-danger" to="/customer_orders/all"

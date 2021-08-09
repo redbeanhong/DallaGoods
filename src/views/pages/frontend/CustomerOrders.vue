@@ -158,10 +158,8 @@ export default {
       vm.$bus.$emit('message:dropdown', msg)
       vm.$bus.$emit('message:push', msg.title, 'success')
 
-      // 將關注資料存到localStorage
       localStorage.setItem('personalProduct', JSON.stringify(vm.stared))
 
-      // 更新通知icon數量
       const count = vm.stared.length
       vm.$bus.$emit('iconCount:change', 'heart', count)
 

@@ -1,11 +1,7 @@
 <template>
-  <div>
+  <div class="position-relative">
+    <div id="infobar"></div>
     <ul class="nav my-4 nav--line justify-content-center flex-nowrap">
-      <li class="nav-item">
-        <router-link class="nav-link" to="/customer_orders/all"
-          >全部<span class="d-none d-sm-inline">商品</span></router-link
-        >
-      </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/customer_orders/key_ring"
           ><span class="d-none d-sm-inline">療癒</span>配件</router-link
@@ -29,3 +25,13 @@
     </ul>
   </div>
 </template>
+
+<style lang="scss" scoped>
+#infobar {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -110px;
+  right: 0;
+}
+</style>

@@ -40,6 +40,16 @@
             </router-link>
           </li>
           <li class="nav-item px-2" @click="navClose">
+            <router-link to="/customer_orders/all" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-shopping-basket mr-3"></i>
+                <p class="mb-0">
+                  全部商品
+                </p>
+              </div>
+            </router-link>
+          </li>
+          <li class="nav-item px-2" @click="navClose">
             <router-link to="/customer_comment" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="fas icon--mid fa-comment-dots mr-3"></i>
