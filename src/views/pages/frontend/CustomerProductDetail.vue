@@ -6,8 +6,7 @@
       <div class="row mb-5">
         <div class="col-md-6">
           <div
-            class="h-100"
-            style="background-size: cover; background-position: center;min-height:500px;"
+            class="h-100 img img--big"
             :style="{ backgroundImage: `url(${product.imageUrl})` }"
           ></div>
         </div>
@@ -61,7 +60,7 @@
           </ul>
         </div>
       </div>
-      <div class="row" style="white-space: pre-line;">
+      <div class="row text--pre-line">
         <div class="col-md-8">
           <section class="mb-5">
             <h3 class="border-bottom border-primary pb-2">商品說明</h3>
@@ -80,14 +79,9 @@
                   aria-expanded="false"
                   aria-controls="qa-01"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q1</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q1</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>可以客製化商品嗎？</small
                     ><small
@@ -96,9 +90,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-01">
+                <div class="collapse collapse--border" id="qa-01">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -113,14 +107,9 @@
                   aria-expanded="false"
                   aria-controls="qa-02"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q2</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q2</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>有提供保固或維修服務嗎？</small
                     ><small
@@ -129,9 +118,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-02">
+                <div class="collapse collapse--border" id="qa-02">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -146,14 +135,9 @@
                   aria-expanded="false"
                   aria-controls="qa-03"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q3</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q3</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>相關五金配件要去哪裡購買呢？</small
                     ><small
@@ -162,9 +146,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-03">
+                <div class="collapse collapse--border" id="qa-03">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -179,14 +163,9 @@
                   aria-expanded="false"
                   aria-controls="qa-04"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q4</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q4</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>是否可以大量訂製呢？</small
                     ><small
@@ -195,9 +174,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-04">
+                <div class="collapse collapse--border" id="qa-04">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -212,14 +191,9 @@
                   aria-expanded="false"
                   aria-controls="qa-05"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q5</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q5</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>運送方式及付款方式有哪些呢？</small
                     ><small
@@ -228,9 +202,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-05">
+                <div class="collapse collapse--border" id="qa-05">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -245,14 +219,9 @@
                   aria-expanded="false"
                   aria-controls="qa-06"
                 >
-                  <span
-                    class="badge bg-primary text-light p-2 mr-3"
-                    style="font-size: 14px;"
-                    >Q6</span
-                  >
+                  <span class="badge bg-primary text-light p-2 mr-3">Q6</span>
                   <div
-                    class="d-flex align-items-center justify-content-between"
-                    style="width: 93%;"
+                    class="d-flex align-items-center justify-content-between w-100"
                   >
                     <small>退換貨方式及規則</small
                     ><small
@@ -261,9 +230,9 @@
                     ></small>
                   </div>
                 </a>
-                <div class="collapse" id="qa-06">
+                <div class="collapse collapse--border" id="qa-06">
                   <p class="py-3 pl-5 pr-3">
-                    <small
+                    <small class="pl-2"
                       >可以在這邊大買特買客製化商品，通通都沒有問題，服務優良包您滿意！</small
                     >
                   </p>
@@ -283,7 +252,7 @@
                   class="text-decoration-none"
                 >
                   <div
-                    class="mask-toggle img img-mid"
+                    class="mask-toggle img img--mid"
                     :style="{ backgroundImage: `url(${item.imageUrl})` }"
                   >
                     <div class="mask h-100"></div>
@@ -434,66 +403,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.collapse {
-  border-top: 1px dashed rgb(194, 192, 192);
-}
-.modal-toggle {
-  .fa-chevron-down {
-    display: none;
-  }
-  .fa-chevron-up {
-    display: inline-block;
-  }
-  &.collapsed {
-    border: none;
-    .fa-chevron-down {
-      display: inline-block;
-    }
-    .fa-chevron-up {
-      display: none;
-    }
-  }
-}
-.card--hover {
-  &:hover {
-    background-color: #fff1ef;
-    .mask-toggle {
-      .mask {
-        display: flex;
-      }
-
-      .heart-regular {
-        display: block;
-      }
-    }
-  }
-
-  .mask-toggle {
-    position: relative;
-
-    .mask {
-      background-color: rgba(233, 233, 233, 0.2);
-      display: none;
-    }
-    .heart {
-      position: absolute;
-      bottom: 15px;
-      right: 20px;
-      padding: 0;
-      margin: 0;
-      display: none;
-    }
-
-    .heart.active {
-      position: absolute;
-      bottom: 15px;
-      right: 20px;
-      padding: 0;
-      margin: 0;
-      display: block;
-    }
-  }
-}
-</style>

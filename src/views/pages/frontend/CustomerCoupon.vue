@@ -80,33 +80,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.coupon {
-  background-image: radial-gradient(
-      circle at 1px 8px,
-      transparent 6px,
-      var(--primary) 6px,
-      var(--primary) 0px
-    ),
-    radial-gradient(
-      circle at 199px 8px,
-      transparent 6px,
-      var(--primary) 6px,
-      var(--primary) 0px
-    );
-  background-size: 200px 18px;
-  background-position: 0 0, 200px 0;
-  background-repeat: repeat-y;
-  color: var(--light);
-
-  &::before {
-    position: absolute;
-    content: '';
-    left: 240px;
-    top: 0;
-    bottom: 0;
-    width: 0;
-  }
-}
-</style>

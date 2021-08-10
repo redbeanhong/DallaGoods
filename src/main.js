@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import $ from 'jquery'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -74,12 +73,5 @@ router.beforeEach((to, from, next) => {
   } else {
     // 如果要前往的頁面不需要驗證，就直接前往
     next()
-  }
-})
-
-router.afterEach((to, from, next) => {
-  if (to.meta.scrollToInfobar) {
-    const infobarPosition = $('#infobar').offset()
-    window.scrollTo(0, infobarPosition.top)
   }
 })

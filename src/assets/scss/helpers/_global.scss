@@ -1,3 +1,19 @@
 html {
   scroll-behavior: smooth;
+  font-size: 0.8rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+.text--pre-line {
+  white-space: pre-line;
+}
+
+.pe--none {
+  cursor: pointer;
+  pointer-events: none;
 }

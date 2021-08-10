@@ -26,7 +26,7 @@
             <!-- 左商品圖片 -->
             <div class="col-md-4">
               <div
-                class="h-100 img img-mid"
+                class="h-100 img img--mid"
                 :style="{ backgroundImage: `url(${item.imageUrl})` }"
               ></div>
             </div>

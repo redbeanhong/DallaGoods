@@ -2,7 +2,7 @@
   <div>
     <section class="container mb-3" id="news">
       <div class="row">
-        <div class="col-md-4 about2 img mb-3 mb-md-0"></div>
+        <div class="col-md-4 image--about2 img mb-3 mb-md-0"></div>
         <div class="col-md-8">
           <h3 class="mb-5">[ Dalla 新訊 ]</h3>
           <p>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </section>
-    <section class="about img py-5 mb-4" id="about">
+    <section class="image--about1 img py-5 mb-4" id="about">
       <div class="container">
         <h3 class="mb-5">[ Dalla 理念 ]</h3>
         <p>
@@ -149,27 +149,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.about {
-  background-image: url('../../../assets/img/about.jpg');
-}
-.about2 {
-  background-image: url('../../../assets/img/about2.jpg');
-  min-height: 300px;
-}
-.slider__item {
-  height: 200px;
-  .slider__content {
-    background-color: rgba(88, 88, 88, 0.5);
-    display: none;
-  }
-
-  &:hover {
-    .slider__content {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-}
-</style>

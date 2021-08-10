@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
 
     <div class="container">
-      <div id="stared__none">
+      <div id="stared__none" v-if="!hasStared">
         <p
           class="h3 text-primary border border-primary rounded p-3 text-center"
         >
@@ -25,7 +25,7 @@
               class="text-decoration-none"
             >
               <div
-                class="mask-toggle img img-mid"
+                class="mask-toggle img img--mid"
                 :style="{ backgroundImage: `url(${item.imageUrl})` }"
               >
                 <div class="mask h-100"></div>
@@ -90,7 +90,8 @@ export default {
         earring: '耳朵上的事',
         tray: '桌上的好事',
         technology: '掌心的小事'
-      }
+      },
+      hasStared: true
     }
   },
   components: {
@@ -109,10 +110,7 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then(res => {
         vm.allProducts = res.data.products.filter(e => e.is_enabled === 1)
-
-        const staredArea = document.querySelector('#stared__none')
-        staredArea.classList.remove('active')
-
+        vm.hasStared = true
         if (vm.productType === 'all') {
           vm.products = vm.allProducts
           vm.pagination = res.data.pagination
@@ -123,9 +121,9 @@ export default {
           vm.pagination = {}
         } else if (vm.productType === 'stared') {
           if (vm.stared.length === 0 || vm.stared === null) {
-            staredArea.classList.add('active')
+            vm.hasStared = false
           } else {
-            staredArea.classList.remove('active')
+            vm.hasStared = true
           }
           vm.products = vm.allProducts.filter(e => vm.stared.includes(e.id))
           vm.pagination = {}
@@ -183,52 +181,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.card--hover {
-  &:hover {
-    background-color: #fff1ef;
-    .mask-toggle {
-      .mask {
-        display: flex;
-      }
-
-      .heart-regular {
-        display: block;
-      }
-    }
-  }
-
-  .mask-toggle {
-    position: relative;
-
-    .mask {
-      background-color: rgba(233, 233, 233, 0.2);
-      display: none;
-    }
-    .heart {
-      position: absolute;
-      bottom: 15px;
-      right: 20px;
-      padding: 0;
-      margin: 0;
-      display: none;
-    }
-
-    .heart.active {
-      position: absolute;
-      bottom: 15px;
-      right: 20px;
-      padding: 0;
-      margin: 0;
-      display: block;
-    }
-  }
-}
-#stared__none {
-  display: none;
-  &.active {
-    display: block;
-  }
-}
-</style>

@@ -26,15 +26,11 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="h-100 imageStory1 img img-mid"></div>
+          <div class="h-100 overflow-hidden">
+            <img src="../../../assets/img/story1.jpeg" alt="imageStory" class="w-100">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.imageStory1 {
-  background-image: url('../../../assets/img/story1.jpeg');
-}
-</style>

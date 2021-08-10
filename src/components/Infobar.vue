@@ -25,13 +25,3 @@
     </ul>
   </div>
 </template>
-
-<style lang="scss" scoped>
-#infobar {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: -110px;
-  right: 0;
-}
-</style>

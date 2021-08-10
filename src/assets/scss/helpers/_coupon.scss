@@ -1,0 +1,27 @@
+.coupon {
+  background-image: radial-gradient(
+      circle at 1px 8px,
+      transparent 6px,
+      $primary 6px,
+      $primary 0px
+    ),
+    radial-gradient(
+      circle at 199px 8px,
+      transparent 6px,
+      $primary 6px,
+      $primary 0px
+    );
+  background-size: 200px 18px;
+  background-position: 0 0, 200px 0;
+  background-repeat: repeat-y;
+  color: $light;
+
+  &::before {
+    position: absolute;
+    content: '';
+    left: 240px;
+    top: 0;
+    bottom: 0;
+    width: 0;
+  }
+}

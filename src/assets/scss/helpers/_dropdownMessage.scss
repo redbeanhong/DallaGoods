@@ -1,5 +1,5 @@
 .DropdownMessage {
-  background: var(--light);
+  background: $light;
   width: 280px;
   position: absolute;
   top: 50px;
@@ -14,7 +14,7 @@
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-bottom-color: var(--primary);
+    border-bottom-color: $primary;
     border-width: 8px;
     margin-left: -8px;
   }

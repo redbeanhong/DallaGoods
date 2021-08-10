@@ -3,7 +3,9 @@
     <nav
       class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow navbar-expand-lg"
     >
-      <router-link class="navbar-brand col-6 col-sm-3 col-lg-2 mr-0" to="/admin"
+      <router-link
+        class="navbar-brand--admin col-6 col-sm-3 col-lg-2 mr-0"
+        to="/admin"
         ><img src="../assets/img/logo.jpg" width="30" height="30" alt="LOGO" />
         後臺系統</router-link
       >
@@ -63,18 +65,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.navbar-brand {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 1rem;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
-}
-
-@media (min-width: 756px) {
-  .navbar-brand {
-    background-color: rgba(0, 0, 0, 0.25);
-  }
-}
-</style>

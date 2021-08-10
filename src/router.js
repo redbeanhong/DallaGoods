@@ -35,24 +35,15 @@ export default new Router({
       children: [
         {
           path: '/',
-          component: CustomerHome,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerHome
         },
         {
           path: 'customer_orders/:productType',
-          component: CustomerOrders,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerOrders
         },
         {
           path: 'product_detail/:productId',
-          component: CustomerProductDetail,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerProductDetail
         },
         {
           path: 'customer_cart',
@@ -77,31 +68,19 @@ export default new Router({
         },
         {
           path: 'Customer_coupon',
-          component: CustomerCoupon,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerCoupon
         },
         {
           path: 'Customer_story',
-          component: CustomerStory,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerStory
         },
         {
           path: 'Customer_comment',
-          component: CustomerComment,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerComment
         },
         {
           path: 'Customer_notice',
-          component: CustomerNotice,
-          meta: {
-            scrollToInfobar: true
-          }
+          component: CustomerNotice
         },
         {
           path: 'Customer_finished',

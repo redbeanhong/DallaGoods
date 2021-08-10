@@ -58,13 +58,3 @@ export default {
   }
 }
 </script>
-
-<style scope>
-.message-alert {
-  position: fixed;
-  max-width: 50%;
-  top: 56px;
-  right: 20px;
-  z-index: 1100;
-}
-</style>
