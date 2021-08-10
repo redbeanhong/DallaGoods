@@ -167,6 +167,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       let addProduct = {}
+      vm.isLoading = true
       vm.cart.products.forEach(e => {
         addProduct = {
           product_id: e.id,
@@ -174,7 +175,10 @@ export default {
         }
         vm.$http.post(api, { data: addProduct }).then(() => {})
       })
-      vm.$router.push('/customer_form')
+      setTimeout(() => {
+        vm.isLoading = false
+        vm.$router.push('/customer_form')
+      }, 1000)
     },
     cleanCart () {
       const vm = this

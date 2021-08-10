@@ -6,6 +6,7 @@
       <div class="row mb-5">
         <div class="col-md-6">
           <div
+            v-if="product.imageUrl"
             class="h-100 img img--big"
             :style="{ backgroundImage: `url(${product.imageUrl})` }"
           ></div>
@@ -49,7 +50,7 @@
             }"
             @click="changeStared"
           >
-            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart mr-2"></i>
             <span v-if="stared.includes(product.id)">已收藏商品</span>
             <span v-else>收藏商品</span>
           </button>
@@ -322,7 +323,7 @@ export default {
       vm.$http.get(api).then(res => {
         vm.product = res.data.product
         vm.isLoading = false
-        this.getRecommend()
+        vm.getRecommend()
       })
     },
     addToCart () {

@@ -9,15 +9,17 @@
         <!-- TABLE -->
         <div class="my-5 row justify-content-center">
           <div class="col-md-6">
-            <table class="table">
+            <table class="table table--fixed">
               <thead>
                 <th>品名</th>
-                <th>數量</th>
-                <th class="text-right">單價</th>
+                <th class="th--sm">數量</th>
+                <th class="text-right th--sm">單價</th>
               </thead>
               <tbody>
                 <tr v-for="item in carts.carts" :key="item.id">
-                  <td class="align-middle">{{ item.product.title }}</td>
+                  <td class="align-middle text-truncate">
+                    {{ item.product.title }}
+                  </td>
                   <td class="align-middle">
                     {{ item.qty }}/{{ item.product.unit }}
                   </td>
@@ -95,6 +97,7 @@
                   id="useremail"
                   v-model="form.user.email"
                   placeholder="請輸入 Email"
+                  name="Email"
                   :class="classes"
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
@@ -112,6 +115,7 @@
                   id="username"
                   v-model="form.user.name"
                   placeholder="輸入姓名"
+                  name="姓名"
                   :class="classes"
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
@@ -129,6 +133,7 @@
                   id="usertel"
                   v-model="form.user.tel"
                   placeholder="請輸入電話"
+                  name="電話"
                   :class="classes"
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
@@ -146,6 +151,7 @@
                   id="useraddress"
                   v-model="form.user.address"
                   placeholder="請輸入地址"
+                  name="地址"
                   :class="classes"
                 />
                 <span class="text-danger">{{ errors[0] }}</span>

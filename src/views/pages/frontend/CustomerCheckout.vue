@@ -87,12 +87,17 @@ export default {
         }
       })
     },
+    cleanCart () {
+      localStorage.removeItem('personalCart')
+    },
     payOrder () {
       const vm = this
       const orderId = vm.$route.params.orderId
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${orderId}`
       vm.$http.post(api).then(res => {
         if (res.data.success) {
+          vm.cleanCart()
+          vm.$bus.$emit('carts:Update')
           vm.$router.push({ path: '/customer_finished' })
         }
       })
