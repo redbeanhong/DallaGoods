@@ -17,22 +17,18 @@
       <ShoppingStep></ShoppingStep>
       <div class="row justify-content-center">
         <div class="col-10 col-md-8">
-          <!-- 商品內容 -->
           <section
             class="row mb-4"
             v-for="item in cart.products"
             :key="item.id"
           >
-            <!-- 左商品圖片 -->
             <div class="col-md-4">
               <div
                 class="h-100 img img--mid"
                 :style="{ backgroundImage: `url(${item.imageUrl})` }"
               ></div>
             </div>
-            <!-- END OF 左商品圖片 -->
 
-            <!-- 右商品說明 -->
             <div class="col-md-8">
               <div class="border p-3 mb-3">
                 <button
@@ -89,11 +85,7 @@
                 </div>
               </div>
             </div>
-            <!-- END OF 右商品說明 -->
           </section>
-          <!-- END OF 商品內容 -->
-
-          <!-- 結帳價格 -->
           <section class="row justify-content-end">
             <div class="col-md-6 col-xl-4 text-center">
               <p class="h3 border-bottom mb-3 p-3">
@@ -108,7 +100,6 @@
               </button>
             </div>
           </section>
-          <!-- END OF 結帳價格 -->
         </div>
       </div>
     </div>
@@ -122,7 +113,6 @@ export default {
   data () {
     return {
       isLoading: false,
-      fullPage: true,
       cart: JSON.parse(localStorage.getItem('personalCart')) || {
         products: []
       },

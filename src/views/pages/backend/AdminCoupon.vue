@@ -2,7 +2,6 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
-    <!-- ADD PRODUCT BTN -->
     <div class="text-right">
       <button
         type="button"
@@ -12,17 +11,15 @@
         建立新的優惠券
       </button>
     </div>
-    <!-- END OF ADD PRODUCT BTN -->
 
-    <!-- TABLE -->
     <table class="table mt-4">
       <thead>
         <td>名稱</td>
-        <td width="120">折扣百分比</td>
-        <td width="200">到期日</td>
-        <td width="100">是否啟用</td>
-        <td width="80">編輯</td>
-        <td width="80">刪除</td>
+        <td>折扣百分比</td>
+        <td class="th--mid">到期日</td>
+        <td class="th--sm">是否啟用</td>
+        <td class="th--sm">編輯</td>
+        <td class="th--sm">刪除</td>
       </thead>
       <tbody>
         <tr v-for="item in coupons" :key="item.id">
@@ -54,16 +51,12 @@
         </tr>
       </tbody>
     </table>
-    <!-- END OF TABLE -->
 
-    <!-- PAGINATION -->
     <Pagination
       :pagination="pagination"
       v-on:getpagination="getCoupons"
     ></Pagination>
-    <!-- END OF PAGINATION -->
 
-    <!-- MODEL EDIT -->
     <div
       class="modal fade"
       id="productModal"
@@ -92,7 +85,6 @@
               <div class="modal-body">
                 <div class="row">
                   <div class="col-sm-12">
-                    <!-- 標題 -->
                     <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
@@ -110,9 +102,7 @@
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div></ValidationProvider
                     >
-                    <!-- END OF 標題 -->
 
-                    <!-- 優惠碼 -->
                     <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
@@ -130,9 +120,7 @@
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div></ValidationProvider
                     >
-                    <!-- END OF 優惠碼 -->
 
-                    <!-- 到期日 -->
                     <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
@@ -150,9 +138,7 @@
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div></ValidationProvider
                     >
-                    <!-- END OF 到期日 -->
 
-                    <!-- 折扣百分比 -->
                     <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
@@ -170,9 +156,7 @@
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div></ValidationProvider
                     >
-                    <!-- END OF 折扣百分比 -->
 
-                    <!-- 是否啟用 -->
                     <div class="form-group">
                       <div class="form-check">
                         <input
@@ -188,7 +172,6 @@
                         </label>
                       </div>
                     </div>
-                    <!-- END OF 是否啟用 -->
                   </div>
                 </div>
               </div>
@@ -213,9 +196,6 @@
         </div>
       </div>
     </div>
-    <!-- END OF MODEL EDIT -->
-
-    <!-- MODEL DELETE -->
     <div
       class="modal fade"
       id="delCouponModal"
@@ -263,7 +243,6 @@
         </div>
       </div>
     </div>
-    <!-- END OF MODEL DELETE -->
   </div>
 </template>
 
@@ -274,11 +253,10 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
-      coupons: [], // 呈現在頁面的所有優惠券清單
-      tempCoupon: {}, // 暫存新增或修改的優惠券
-      isNew: true, // 是否為新增優惠券
+      coupons: [],
+      tempCoupon: {},
+      isNew: true,
       isLoading: false,
-      fullPage: true,
       status: {
         fileUploading: false
       },
@@ -292,11 +270,9 @@ export default {
     openModal (modalName, isNew, item) {
       $(`#${modalName}`).modal('show')
       if (isNew) {
-        // 如果是新增優惠券，就給空物件
         this.tempCoupon = {}
         this.isNew = true
       } else {
-        // 如果是修改優惠券，就傳入被選取的物件內容
         this.tempCoupon = { ...item }
         this.isNew = false
       }
@@ -304,7 +280,6 @@ export default {
     closeModal (modalName) {
       $(`#${modalName}`).modal('hide')
     },
-    // 取得所有優惠券，並加入到頁面的優惠券清單
     getCoupons (page = 1) {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
@@ -315,7 +290,6 @@ export default {
         vm.isLoading = false
       })
     },
-    // 刪除暫存在tempCoupon的優惠券
     deleteCoupon () {
       const vm = this
       const itemId = vm.tempCoupon.id
@@ -329,7 +303,6 @@ export default {
         }
       })
     },
-    // 新增或修改優惠券
     updateCoupon () {
       const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`

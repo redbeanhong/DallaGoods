@@ -6,7 +6,6 @@
       <div class="container">
         <ShoppingStep class="mb-5"></ShoppingStep>
 
-        <!-- TABLE -->
         <div class="my-5 row justify-content-center">
           <div class="col-md-6">
             <table class="table table--fixed">
@@ -77,9 +76,7 @@
             </div>
           </div>
         </div>
-        <!-- END OF TABLE -->
 
-        <!-- FORM -->
         <div class="my-5 row justify-content-center">
           <form class="col-md-6" @submit.prevent="submitForm">
             <p class="text-danger text-right">標示 * 的項目請務必填入</p>
@@ -179,7 +176,6 @@
             </div>
           </form>
         </div>
-        <!-- END OF FORM -->
       </div>
     </ValidationObserver>
   </div>
@@ -191,9 +187,8 @@ import ShoppingStep from '@/components/ShoppingStep.vue'
 export default {
   data () {
     return {
-      carts: {}, // 購物車內容
+      carts: {},
       isLoading: false,
-      fullPage: true,
       form: {
         user: {
           name: '',

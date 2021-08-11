@@ -2,12 +2,11 @@
   <div>
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">歡迎回來Dalla Goods賣家系統！</h1>
+        <p class="display-3">歡迎回來Dalla Goods賣家系統！</p>
         <p>
           為了提供給您更良好的使用體驗，賣家系統首頁即將全新改版，預計推出簡易儀表版和代辦事項功能，協助您能更有效率管理賣場商品與訂單。
         </p>
 
-        <!-- Button trigger modal -->
         <button
           type="button"
           class="btn btn-primary"
@@ -17,7 +16,6 @@
           客服諮詢 &raquo;
         </button>
 
-        <!-- Modal -->
         <div
           class="modal fade"
           id="exampleModalCenter"

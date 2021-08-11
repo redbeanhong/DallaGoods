@@ -5,7 +5,7 @@
       <div class="my-5 row justify-content-center">
         <div class="col-10">
           <div class="jumbotron">
-            <h1 class="display-4">謝謝您的購買！</h1>
+            <p class="display-4">謝謝您的購買！</p>
             <p class="lead">
               您已完成購買程序，本公司將盡速出貨，謝謝您！
             </p>

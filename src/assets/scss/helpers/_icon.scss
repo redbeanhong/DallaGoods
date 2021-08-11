@@ -14,7 +14,7 @@
   border-radius: 50%;
   line-height: $count--size * 3;
   text-align: center;
-  color: var(--light);
-  background: var(--danger);
+  color: $light;
+  background: $danger;
   text-align: center;
 }

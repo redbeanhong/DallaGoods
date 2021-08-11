@@ -310,7 +310,6 @@ export default {
         loadingItem: false
       },
       isLoading: false,
-      fullPage: true,
       stared: JSON.parse(localStorage.getItem('personalProduct')) || [],
       recommend: []
     }

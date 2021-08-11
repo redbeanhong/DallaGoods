@@ -2,7 +2,6 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
-    <!-- ADD PRODUCT BTN -->
     <div class="text-right">
       <button
         type="button"
@@ -12,18 +11,16 @@
         建立新的產品
       </button>
     </div>
-    <!-- END OF ADD PRODUCT BTN -->
 
-    <!-- TABLE -->
     <table class="table mt-4">
       <thead>
-        <td width="120">分類</td>
+        <td class="th--mid">分類</td>
         <td>產品名稱</td>
-        <td width="120">原價</td>
-        <td width="120">售價</td>
-        <td width="100">是否啟用</td>
-        <td width="80">編輯</td>
-        <td width="80">刪除</td>
+        <td class="th--sm">原價</td>
+        <td class="th--sm">售價</td>
+        <td class="th--sm">是否啟用</td>
+        <td class="th--sm">編輯</td>
+        <td class="th--sm">刪除</td>
       </thead>
       <tbody>
         <tr v-for="item in products" :key="item.id">
@@ -56,16 +53,12 @@
         </tr>
       </tbody>
     </table>
-    <!-- END OF TABLE -->
 
-    <!-- PAGINATION -->
     <Pagination
       :pagination="pagination"
       v-on:getpagination="getProducts"
     ></Pagination>
-    <!-- END OF PAGINATION -->
 
-    <!-- MODEL EDIT -->
     <div
       class="modal fade"
       id="productModal"
@@ -94,9 +87,7 @@
 
               <div class="modal-body">
                 <div class="row">
-                  <!-- 表單左邊圖片區 -->
                   <div class="col-sm-4">
-                    <!-- 圖片網址 -->
                     <ValidationProvider
                       rules="required"
                       v-slot="{ errors, classes }"
@@ -114,9 +105,7 @@
                         <span class="text-danger">{{ errors[0] }}</span>
                       </div>
                     </ValidationProvider>
-                    <!-- END OF 圖片網址 -->
 
-                    <!-- 上傳圖片 -->
                     <div class="form-group">
                       <label for="customFile"
                         >或 上傳圖片
@@ -133,7 +122,6 @@
                         @change="uploadFile()"
                       />
                     </div>
-                    <!-- END OF 上傳圖片 -->
 
                     <img
                       v-if="tempProduct.imageUrl"
@@ -142,9 +130,7 @@
                       alt="productImg"
                     />
                   </div>
-                  <!-- END OF 表單左邊圖片區 -->
 
-                  <!-- 表單右邊 -->
                   <div class="col-sm-8">
                     <ValidationProvider
                       rules="required"
@@ -306,7 +292,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- END OF 表單右邊 -->
                 </div>
               </div>
               <div class="modal-footer">
@@ -331,9 +316,7 @@
         </div>
       </div>
     </div>
-    <!-- END OF MODEL EDIT -->
 
-    <!-- MODEL DELETE -->
     <div
       class="modal fade"
       id="delProductModal"
@@ -381,7 +364,6 @@
         </div>
       </div>
     </div>
-    <!-- END OF MODEL DELETE -->
   </div>
 </template>
 
@@ -393,10 +375,9 @@ export default {
   data () {
     return {
       products: [],
-      tempProduct: {}, // 暫存新增或修改的商品
-      isNew: true, // 是否為新增商品
+      tempProduct: {},
+      isNew: true,
       isLoading: false,
-      fullPage: true,
       status: {
         fileUploading: false
       },
@@ -411,11 +392,9 @@ export default {
     openModal (modalName, isNew, item) {
       $(`#${modalName}`).modal('show')
       if (isNew) {
-        // 如果是新增商品，就給空物件
         this.tempProduct = { category: '', num: 1 }
         this.isNew = true
       } else {
-        // 如果是修改商品，就傳入被選取的物件內容
         this.tempProduct = { ...item }
         this.isNew = false
         this.tempProduct.num = 1
@@ -424,7 +403,6 @@ export default {
     closeModal (modalName) {
       $(`#${modalName}`).modal('hide')
     },
-    // 取得所有商品，並加入到頁面的商品清單
     getProducts (page = 1) {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
@@ -435,7 +413,6 @@ export default {
         vm.isLoading = false
       })
     },
-    // 刪除暫存在tempProduct的商品
     deleteProduct () {
       const vm = this
       const itemId = vm.tempProduct.id
@@ -449,7 +426,6 @@ export default {
         }
       })
     },
-    // 新增商品或修改商品
     updateProduct () {
       const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`

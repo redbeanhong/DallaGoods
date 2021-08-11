@@ -3,13 +3,14 @@
     <nav
       class="navbar navbar-expand-lg navbar-primary align-items-center bg-white"
     >
-      <!-- LOGO -->
-      <router-link class="navbar-brand order-1 mr-0" to="/"
-        ><img src="../assets/img/logo.jpg" width="50" height="50" alt="LOGO"
-      /></router-link>
-      <!-- END OF LOGO -->
+      <h1 class="h1--disappear">
+        <router-link
+          class="navbar-brand order-1 mr-0 d-block img image--logo"
+          to="/"
+          >DallaGoods</router-link
+        >
+      </h1>
 
-      <!-- CLOSE -->
       <button
         class="navbar-toggler order-3 order-lg-2 ml-3"
         type="button"
@@ -21,9 +22,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- END OF CLOSE -->
 
-      <!-- TITLE GROUP -->
       <div
         class="collapse navbar-collapse order-4 order-lg-3"
         id="navbarTogglerDemo02"
@@ -81,19 +80,14 @@
           </li>
         </ul>
       </div>
-      <!-- END OF TITLE GROUP -->
 
-      <!-- ICON GROUP -->
       <ul class="navbar-nav ml-auto mt-lg-0 flex-row order-2 order-lg-4">
-        <!-- SELLS -->
         <li class="nav-item mr-2">
           <router-link class="nav-link nav-link-icon fa-stack" to="/admin">
             <i class="fas icon--mid fa-user-tie fa-stack-1x xfa-inverse"></i>
           </router-link>
         </li>
-        <!-- END OF SELLS -->
 
-        <!-- HEART -->
         <li class="nav-item mr-2">
           <router-link
             class="nav-link nav-link-icon fa-stack"
@@ -102,9 +96,7 @@
             <i class="fas icon--mid fa-heart fa-stack-1x xfa-inverse"></i>
           </router-link>
         </li>
-        <!-- END OF HEART -->
 
-        <!-- MESSAGE -->
         <li
           class="nav-item mr-2 position-relative"
           v-on:mouseover="msgOpen = true"
@@ -122,9 +114,7 @@
             @msgCount="iconUpdate"
           ></DropdownMessage>
         </li>
-        <!-- END OF MESSAGE -->
 
-        <!-- CART -->
         <li class="nav-item">
           <router-link
             class="nav-link nav-link-icon fa-stack"
@@ -137,9 +127,7 @@
             ></i>
           </router-link>
         </li>
-        <!-- END OF CART -->
       </ul>
-      <!-- END OF ICON GROUP -->
     </nav>
   </div>
 </template>

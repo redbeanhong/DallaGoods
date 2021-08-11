@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
 
     <div class="container">
-      <div id="stared__none" v-if="!hasStared">
+      <div id="stared__none" v-if="stared.length === 0">
         <p
           class="h3 text-primary border border-primary rounded p-3 text-center"
         >
@@ -17,7 +17,11 @@
       </div>
 
       <div class="row mt-4">
-        <div class="col-md-3 mb-4" v-for="item in products" :key="item.id">
+        <div
+          class="col-md-3 mb-4"
+          v-for="item in filterProducts"
+          :key="item.id"
+        >
           <div class="card border-0 shadow-sm card--hover">
             <a
               href="#"
@@ -61,12 +65,10 @@
         </div>
       </div>
 
-      <!-- PAGINATION -->
       <Pagination
-        :pagination="pagination"
+        :pagination="controlPagination"
         v-on:getpagination="getProducts"
       ></Pagination>
-      <!-- END OF PAGINATION -->
     </div>
   </div>
 </template>
@@ -78,9 +80,7 @@ export default {
   data () {
     return {
       allProducts: [],
-      products: [],
       isLoading: false,
-      fullPage: true,
       pagination: {},
       stared: JSON.parse(localStorage.getItem('personalProduct')) || [],
       productType: '',
@@ -90,15 +90,37 @@ export default {
         earring: '耳朵上的事',
         tray: '桌上的好事',
         technology: '掌心的小事'
-      },
-      hasStared: true
+      }
     }
   },
   components: {
     Pagination
   },
+  computed: {
+    filterProducts () {
+      const vm = this
+      let products = []
+      if (vm.productType === 'all') {
+        products = vm.allProducts
+      } else if (vm.productList[vm.productType]) {
+        products = vm.allProducts.filter(e => {
+          return e.category === vm.productList[vm.productType]
+        })
+      } else if (vm.productType === 'stared') {
+        products = vm.allProducts.filter(e => vm.stared.includes(e.id))
+      }
+      return products
+    },
+    controlPagination () {
+      const vm = this
+      let controlPagination = {}
+      if (vm.productType === 'all') {
+        controlPagination = vm.pagination
+      }
+      return controlPagination
+    }
+  },
   methods: {
-    // 取得所有商品，並加入到頁面的商品清單
     getProducts (page = 1) {
       const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
@@ -110,24 +132,7 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then(res => {
         vm.allProducts = res.data.products.filter(e => e.is_enabled === 1)
-        vm.hasStared = true
-        if (vm.productType === 'all') {
-          vm.products = vm.allProducts
-          vm.pagination = res.data.pagination
-        } else if (vm.productList[vm.productType]) {
-          vm.products = vm.allProducts.filter(e => {
-            return e.category === vm.productList[vm.productType]
-          })
-          vm.pagination = {}
-        } else if (vm.productType === 'stared') {
-          if (vm.stared.length === 0 || vm.stared === null) {
-            vm.hasStared = false
-          } else {
-            vm.hasStared = true
-          }
-          vm.products = vm.allProducts.filter(e => vm.stared.includes(e.id))
-          vm.pagination = {}
-        }
+        vm.pagination = res.data.pagination
         vm.isLoading = false
       })
     },

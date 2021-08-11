@@ -30,8 +30,6 @@ Object.keys(rules).forEach(rule => {
   })
 })
 
-// localize('zh_TW', TW);
-
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
 
@@ -63,15 +61,12 @@ router.beforeEach((to, from, next) => {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
     axios.post(api).then(res => {
       if (res.data.success) {
-        // 如果為登入中，就可以進入頁面
         next()
       } else {
-        // 如果尚未登入，就轉跳到登入頁面
         next({ path: '/login' })
       }
     })
   } else {
-    // 如果要前往的頁面不需要驗證，就直接前往
     next()
   }
 })

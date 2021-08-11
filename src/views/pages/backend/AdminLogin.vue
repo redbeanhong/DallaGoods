@@ -2,7 +2,7 @@
   <div class="login">
     <AlertMessage></AlertMessage>
     <form class="login__singin" @submit.prevent="signin">
-      <h1 class="h3 mb-3 font-weight-normal">管理員登入</h1>
+      <p class="h3 mb-3 font-weight-normal">管理員登入</p>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input
         v-model="user.username"
