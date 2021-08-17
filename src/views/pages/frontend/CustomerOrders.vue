@@ -3,7 +3,10 @@
     <loading :active.sync="isLoading"></loading>
 
     <div class="container">
-      <div id="stared__none" v-if="stared.length === 0">
+      <div
+        id="stared__none"
+        v-if="stared.length === 0 && productType === 'stared'"
+      >
         <p
           class="h3 text-primary border border-primary rounded p-3 text-center"
         >
